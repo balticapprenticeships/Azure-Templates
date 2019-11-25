@@ -200,7 +200,6 @@
       "location": "[parameters('location')]",
       "tags": {
         "DisplayName": "NetworkInterface",
-        "Environment" : "[resourceGroup().tags['Environment']]",
         "Dept" : "[resourceGroup().tags['Dept']]",
         "Created By" : "[parameters('createdBy')]"
       },
@@ -240,7 +239,6 @@
       "location": "[parameters('location')]",
       "tags": {
         "DisplayName": "NetworkSecurityGroup",
-        "Environment" : "[resourceGroup().tags['Environment']]",
         "Dept" : "[resourceGroup().tags['Dept']]",
         "Created By" : "[parameters('createdBy')]"
       },
@@ -253,7 +251,6 @@
       "location": "[parameters('location')]",
       "tags": {
         "DisplayName": "VirtualNetwork",
-        "Environment" : "[resourceGroup().tags['Environment']]",
         "Dept" : "[resourceGroup().tags['Dept']]",
         "Created By" : "[parameters('createdBy')]"
       },
@@ -280,7 +277,6 @@
       "location": "[parameters('location')]",
       "tags": {
         "DisplayName": "PublicIPAddress",
-        "Environment" : "[resourceGroup().tags['Environment']]",
         "Dept" : "[resourceGroup().tags['Dept']]",
         "Created By" : "[parameters('createdBy')]"
       },
@@ -305,7 +301,6 @@
       "location": "[parameters('location')]",
       "tags": {
         "DisplayName": "VirtualMachine",
-        "Environment" : "[resourceGroup().tags['Environment']]",
         "Dept" : "[resourceGroup().tags['Dept']]",
         "Created By" : "[parameters('createdBy')]"
       },
@@ -391,7 +386,6 @@
       "location": "[parameters('location')]",
       "tags": {
         "DisplayName": "ShutdownSchedule",
-        "Environment" : "[resourceGroup().tags['Environment']]",
         "Dept" : "[resourceGroup().tags['Dept']]",
         "Created By" : "[parameters('createdBy')]"
       },
