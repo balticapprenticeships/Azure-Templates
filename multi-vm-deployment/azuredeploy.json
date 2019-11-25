@@ -200,7 +200,7 @@
       "location": "[parameters('location')]",
       "tags": {
         "DisplayName": "NetworkInterface",
-        "Enviroment" : "[resourceGroup().tags['Enviroment']]",
+        "Environment" : "[resourceGroup().tags['Environment']]",
         "Dept" : "[resourceGroup().tags['Dept']]",
         "Created By" : "[parameters('createdBy')]"
       },
@@ -240,7 +240,7 @@
       "location": "[parameters('location')]",
       "tags": {
         "DisplayName": "NetworkSecurityGroup",
-        "Enviroment" : "[resourceGroup().tags['Enviroment']]",
+        "Environment" : "[resourceGroup().tags['Environment']]",
         "Dept" : "[resourceGroup().tags['Dept']]",
         "Created By" : "[parameters('createdBy')]"
       },
@@ -253,7 +253,7 @@
       "location": "[parameters('location')]",
       "tags": {
         "DisplayName": "VirtualNetwork",
-        "Enviroment" : "[resourceGroup().tags['Enviroment']]",
+        "Environment" : "[resourceGroup().tags['Environment']]",
         "Dept" : "[resourceGroup().tags['Dept']]",
         "Created By" : "[parameters('createdBy')]"
       },
@@ -280,7 +280,7 @@
       "location": "[parameters('location')]",
       "tags": {
         "DisplayName": "PublicIPAddress",
-        "Enviroment" : "[resourceGroup().tags['Enviroment']]",
+        "Environment" : "[resourceGroup().tags['Environment']]",
         "Dept" : "[resourceGroup().tags['Dept']]",
         "Created By" : "[parameters('createdBy')]"
       },
@@ -305,7 +305,7 @@
       "location": "[parameters('location')]",
       "tags": {
         "DisplayName": "VirtualMachine",
-        "Enviroment" : "[resourceGroup().tags['Enviroment']]",
+        "Environment" : "[resourceGroup().tags['Environment']]",
         "Dept" : "[resourceGroup().tags['Dept']]",
         "Created By" : "[parameters('createdBy')]"
       },
@@ -391,7 +391,7 @@
       "location": "[parameters('location')]",
       "tags": {
         "DisplayName": "ShutdownSchedule",
-        "Enviroment" : "[resourceGroup().tags['Enviroment']]",
+        "Environment" : "[resourceGroup().tags['Environment']]",
         "Dept" : "[resourceGroup().tags['Dept']]",
         "Created By" : "[parameters('createdBy')]"
       },
