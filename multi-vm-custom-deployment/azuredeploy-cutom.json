@@ -125,7 +125,7 @@
             "imageValue": "BAT-WS2K12R2-Image"
         },
         "CustomWindowsServer2016": {
-            "imageValue": "BAT-WS2K16-Image"
+            "imageValue": "2016BrianB-image-20190731124458"
         },
         "CustomUbuntuServer": {
             "imageValue": "BAT-Ubuntu-Image"
@@ -316,8 +316,7 @@
               }
             },
             "imageReference": {
-                "id": "[if(equals(parameters('platform'), 'Custom'), concat('/subscriptions/', subscription().Id, '/resourseGroups/BAT-CustomVmImages/providers/Micrsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue), json('null'))]",              
-              "version": "latest"
+                "id": "[if(equals(parameters('platform'), 'Custom'), concat('/subscriptions/', subscription().Id, '/resourseGroups/L4_Network_Architechture/providers/Micrsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue), json('null'))]"
             }
           },
           "networkProfile": {
