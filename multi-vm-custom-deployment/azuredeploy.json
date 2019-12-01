@@ -4,7 +4,7 @@
     "parameters": {
       "location": {
         "type": "string",
-        "defaultValue": "ukwest",
+        "defaultValue": "uksouth",
         "allowedValues": [
           "ukwest",
           "uksouth"
@@ -22,21 +22,53 @@
       },
       "virtualMachineCount": {
           "type": "int",
+          "maxValue": 14,
           "metadata": {
             "decription": "Number of Virtual Machines required e.g. 5"
           }
       },
+      "newOrExistingVnet": {
+        "type": "string",
+        "allowedValues": [
+          "NewVnet",
+          "ExistingVnet"
+        ],
+        "metadata":{
+          "description": "Creates a new or use an existing Vnet"
+        }
+      },
+      "existingVNetName":{
+        "type": "string",
+        "defaultValue": "L4_Network_Architechture-vnet",
+        "metadata":{
+          "description": "Input the name of the existing VNet to be used"
+        }
+      },
+      "existingVNetSubnet":{
+        "type": "string",
+        "defaultValue": "default",
+        "metadata":{
+          "description": "Input the name of the exisiting subnet to be used"
+        }
+      },
+      "existingVNetResourceGroup":{
+        "type": "string",
+        "defaultValue": "L4_Network_Architechture",
+        "metadata":{
+            "description": "This should be the name of the current resource group"
+        }
+      },
       "createdBy":{
         "type": "string",
         "metadata": {
-          "description": "Please enter your name"
+          "description": "Please enter your name 'Firstname Surname'"
         }
       },
       "trainerInitials": {
         "type": "string",
         "minLength": 2,
         "metadata": {
-          "description": "Trainer initials used to create a unique resource group."
+          "description": "Trainer initials used to create a unique resources."
         }
       },
       "osDiskType": {
@@ -237,6 +269,7 @@
         "properties": "[if(equals(parameters('platform'), 'Windows'), variables('allowRDP'), variables('allowSSH'))]"
       },
       {
+        "condition": "[equals(parameters('newOrExistingVnet'), 'newVnet')]",
         "apiVersion": "2019-04-01",
         "type": "Microsoft.Network/virtualNetworks",
         "name": "[variables('virtualNetworkName')]",      
@@ -245,21 +278,21 @@
           "DisplayName": "VirtualNetwork",
           "Dept" : "[resourceGroup().tags['Dept']]",
           "Created By" : "[parameters('createdBy')]"
-        },
+        },        
         "properties": {
-          "addressSpace": {
+            "addressSpace": {
             "addressPrefixes": [
-              "[variables('addressPrefixes')]"
+                "[variables('addressPrefixes')]"
             ]
-          },
-          "subnets": [
+            },
+            "subnets": [
             {
-              "name": "[variables('subnetName')]",
-              "properties": {
+                "name": "[variables('subnetName')]",
+                "properties": {
                 "addressPrefix": "[variables('subnetsAddressPrefix')]"
-              }
+                }
             }
-          ]
+            ]
         }
       },
       {
@@ -316,7 +349,7 @@
               }
             },
             "imageReference": {
-                "id": "[if(equals(parameters('platform'), 'Custom'), concat('/subscriptions/', subscription().Id, '/resourseGroups/L4_Network_Architechture/providers/Micrsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue), json('null'))]"
+                "id": "[concat('/subscriptions/822ba9e4-c8d6-4bba-b7bc-8e6786d172e3/resourceGroups/L4_Network_Architechture/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
             }
           },
           "networkProfile": {
@@ -339,34 +372,7 @@
               "enabled": false
             }
           }
-        },
-        "resources": [
-          {
-            "condition": "[equals(parameters('platform'), 'Windows')]",
-            "comments": "Custom Script that changes the region of the VM to UK",
-            "apiVersion": "2018-10-01",
-            "type": "extensions",
-            "name": "[concat(variables('vmNamePrefix'), copyIndex(1), 'CustomScriptExtension')]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-              "[concat('Microsoft.Compute/virtualMachines/', variables('vmNamePrefix'), copyIndex(1))]"
-            ],
-            "properties": {
-              "publisher": "Microsoft.Compute",
-              "type": "CustomScriptExtension",
-              "autoUpgradeMinorVersion": true,
-              "typeHandlerVersion": "1.4",
-              "settings": {
-                "fileUris": [
-                  "[concat(variables('_artifactsLocation'), '/regional-settings/regionalSettings.ps1')]"
-                ]
-              },
-              "protectedSettings": {
-                "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File regionalSettings.ps1"
-              }
-            }
-          }
-        ]
+        }
       },          
       {
         "apiVersion": "2017-04-26-preview",
