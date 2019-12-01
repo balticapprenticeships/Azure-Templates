@@ -1,10 +1,10 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "2.0.1.0",
+    "contentVersion": "2.1.0.0",
     "parameters": {
       "location": {
         "type": "string",
-        "defaultValue": "uksouth",
+        "defaultValue": "ukwest",
         "allowedValues": [
           "ukwest",
           "uksouth"
@@ -27,37 +27,6 @@
             "decription": "Number of Virtual Machines required e.g. 5"
           }
       },
-      "newOrExistingVnet": {
-        "type": "string",
-        "allowedValues": [
-          "NewVnet",
-          "ExistingVnet"
-        ],
-        "metadata":{
-          "description": "Creates a new or use an existing Vnet"
-        }
-      },
-      "existingVNetName":{
-        "type": "string",
-        "defaultValue": "L4_Network_Architechture-vnet",
-        "metadata":{
-          "description": "Input the name of the existing VNet to be used"
-        }
-      },
-      "existingVNetSubnet":{
-        "type": "string",
-        "defaultValue": "default",
-        "metadata":{
-          "description": "Input the name of the exisiting subnet to be used"
-        }
-      },
-      "existingVNetResourceGroup":{
-        "type": "string",
-        "defaultValue": "L4_Network_Architechture",
-        "metadata":{
-            "description": "This should be the name of the current resource group"
-        }
-      },
       "createdBy":{
         "type": "string",
         "metadata": {
@@ -67,6 +36,7 @@
       "trainerInitials": {
         "type": "string",
         "minLength": 2,
+        "maxLength": 2,
         "metadata": {
           "description": "Trainer initials used to create a unique resources."
         }
@@ -106,10 +76,10 @@
       "operatingSystem": {
         "type": "string",
         "allowedValues": [
-          "CustomWindowsDesktop",
-          "CustomWindowsServer2012R2",
-          "CustomWindowsServer2016",
-          "CustomUbuntuServer"
+          "WindowsDesktop",
+          "WindowsServer2012R2",
+          "WindowsServer2016",
+          "UbuntuServer"
         ],
         "metadata": {
           "description": "Choose your operating system."
@@ -149,6 +119,7 @@
       "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
       "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
+      "subscriptionId": "[subscription().id]",
       "operatingSystemValues": {
         "CustomWindowsDesktop": {
             "imageValue": "BAT-W10PRO-Image"
@@ -269,7 +240,6 @@
         "properties": "[if(equals(parameters('platform'), 'Windows'), variables('allowRDP'), variables('allowSSH'))]"
       },
       {
-        "condition": "[equals(parameters('newOrExistingVnet'), 'newVnet')]",
         "apiVersion": "2019-04-01",
         "type": "Microsoft.Network/virtualNetworks",
         "name": "[variables('virtualNetworkName')]",      
