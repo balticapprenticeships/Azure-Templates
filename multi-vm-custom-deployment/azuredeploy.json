@@ -349,7 +349,7 @@
               }
             },
             "imageReference": {
-                "id": "[concat('/subscriptions/822ba9e4-c8d6-4bba-b7bc-8e6786d172e3/resourceGroups/L4_Network_Architechture/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
+                "id": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/L4_Network_Architechture/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
             }
           },
           "networkProfile": {
