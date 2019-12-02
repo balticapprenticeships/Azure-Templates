@@ -324,7 +324,7 @@
               }
             },
             "imageReference": {
-                "id": "[concat('/subscriptions/', parameters('subscriptionId') '/resourceGroups/L4_Network_Architechture/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
+                "id": "[concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/L4_Network_Architechture/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
             }
           },
           "networkProfile": {
