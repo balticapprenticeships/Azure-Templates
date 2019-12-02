@@ -13,6 +13,12 @@
           "description": "Location to store the resource group and all vm's."
         }
       },
+      "subscriptionId":{
+        "type": "string",
+        "metadata":{
+          "description": "ID of the subscription where the VM's will be created"
+        }
+      },
       "virtualMachineName": {
         "type": "string",
         "maxLength": 10,
@@ -119,7 +125,6 @@
       "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
       "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
-      "subscriptionId": "[subscription().id]",
       "operatingSystemValues": {
         "CustomWindowsDesktop": {
             "imageValue": "BAT-W10PRO-Image"
@@ -319,7 +324,7 @@
               }
             },
             "imageReference": {
-                "id": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/L4_Network_Architechture/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
+                "id": "[concat('/subscriptions/', parameters('subscriptionId') '/resourceGroups/L4_Network_Architechture/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
             }
           },
           "networkProfile": {
