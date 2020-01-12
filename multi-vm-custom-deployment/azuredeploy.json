@@ -370,7 +370,7 @@
                 ]
               },
               "protectedSettings": {
-                "commandToExecute": "powershell.exe -ExecutionPolicy Unrestriced -File regionalSettings.ps1"
+                "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File regionalSettings.ps1"
               }
             }
           }
