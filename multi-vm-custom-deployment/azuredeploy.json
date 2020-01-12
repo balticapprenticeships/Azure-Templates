@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "2.1.0.0",
+    "contentVersion": "2.2.0.0",
     "parameters": {
       "location": {
         "type": "string",
@@ -82,7 +82,7 @@
       "operatingSystem": {
         "type": "string",
         "allowedValues": [
-          "WindowsDesktop",
+          "Windows10Desktop",
           "WindowsServer2012R2",
           "WindowsServer2016",
           "UbuntuServer"
@@ -126,16 +126,16 @@
       "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
       "operatingSystemValues": {
-        "CustomWindowsDesktop": {
-            "imageValue": "BAT-W10PRO-Image"
+        "Windows10Desktop": {
+            "imageValue": "Windows10Base-image-20200110140426"
         },
-        "CustomWindowsServer2012R2": {
+        "WindowsServer2012R2": {
             "imageValue": "BAT-WS2K12R2-Image"
         },
         "WindowsServer2016": {
-            "imageValue": "BalticServer"
+            "imageValue": "Server2016Base-image-20200110150716"
         },
-        "CustomUbuntuServer": {
+        "UbuntuServer": {
             "imageValue": "BAT-Ubuntu-Image"
         }
     },
@@ -324,7 +324,7 @@
               }
             },
             "imageReference": {
-                "id": "[concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/L4NetworkSystems/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
+                "id": "[concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/BalticImagesRg/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
             }
           },
           "networkProfile": {
