@@ -127,7 +127,7 @@
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
       "operatingSystemValues": {
         "Windows10Desktop": {
-            "imageValue": "Windows10Base-image-20200110140426"
+            "imageValue": "Win10BaseImage"
         },
         "WindowsServer2012R2": {
             "imageValue": "BAT-WS2K12R2-Image"
@@ -189,8 +189,7 @@
           }
         }
       ]
-    },
-      "_artifactsLocation": "https://raw.githubusercontent.com/balticapprenticeships/Azure-Extensions/master/"
+    }
     },
     "resources": [
       {
