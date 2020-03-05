@@ -202,9 +202,9 @@
         }
       ]
     },
-    "_artifactslocation": "https://raw.githubusercontent.com/balticapprenticeships/azure-extensions/Dscev",
+    "_artifactslocation": "https://raw.githubusercontent.com/balticapprenticeships/azure-extensions/master",
     "dscArchiveFolder": "DSC",
-    "dscArchiveFileName": "BaLabServerDsc.zip"
+    "dscArchiveFileName": "xBaLabServerCfg.zip"
     },
     "resources": [
       {
@@ -385,11 +385,8 @@
                 "wmfVersion": "latest",
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
-                  "script": "BaLabServerDsc.ps1",
-                  "function": "BaLabServerCfg"
-                },
-                "configurationArguments": {
-                  "nodeName": "[concat(variables('vmNamePrefix'), copyIndex(1))]"
+                  "script": "xBaLabServerCfg.ps1",
+                  "function": "xBaLabServerCfg"
                 }
               },
               "protectedSettings": {
