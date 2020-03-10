@@ -121,7 +121,7 @@
         }
       },
       "localUserPassword": {
-        "type": "string",
+        "type": "securestring",
         "metadata":{
           "description": "None admin user password. If Linux SSH is recommended."
         }
