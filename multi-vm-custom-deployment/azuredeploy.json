@@ -114,13 +114,13 @@
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
         }
       },
-      "noneAdminUsername": {
+      "localUsername": {
         "type": "string",
         "metadata":{
           "description": "None admin username"
         }
       },
-      "noneAdminUserPassword": {
+      "localUserPassword": {
         "type": "string",
         "metadata":{
           "description": "None admin user password. If Linux SSH is recommended."
@@ -392,8 +392,8 @@
               "protectedSettings": {
                 "configurationArguments": {
                   "Credential": {
-                    "UserName": "[parameters('noneAdminUsername')]",
-                    "Password": "[parameters('noneAdminUserPassword')]"
+                    "UserName": "[parameters('localUsername')]",
+                    "Password": "[parameters('localUserPassword')]"
                   }
                 }
               }
