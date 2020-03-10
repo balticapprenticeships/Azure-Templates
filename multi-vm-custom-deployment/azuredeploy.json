@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "2.2.0.0",
+    "contentVersion": "3.0.0.0",
     "parameters": {
       "location": {
         "type": "string",
@@ -91,7 +91,7 @@
           "description": "Choose your operating system."
         }
       },
-      "virtualMachineAdminUsername": {
+      "AdminUsername": {
         "type": "string",
         "metadata": {
           "description": "Admin username for the Virtual Machine."
@@ -108,10 +108,22 @@
           "descriptopn": "The type of authentication used on the virtual machine. SSH is recommended for Linux VMs"
         }
     },
-      "virtualMachineAdminPasswordOrSsh": {
+      "AdminPasswordOrSsh": {
         "type": "securestring",
         "metadata": {
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
+        }
+      },
+      "localUsername": {
+        "type": "string",
+        "metadata":{
+          "description": "None admin username"
+        }
+      },
+      "localUserPassword": {
+        "type": "string",
+        "metadata":{
+          "description": "None admin user password. If Linux SSH is recommended."
         }
       }      
     },
@@ -150,8 +162,8 @@
         "ssh": {
             "publicKeys": [
                 {
-                    "path": "[concat('/home/', parameters('virtualMachineAdminUsername'), '/.ssh/authorized_keys')]",
-                    "keyData": "[parameters('virtualMachineAdminPasswordOrSsh')]"
+                    "path": "[concat('/home/', parameters('AdminUsername'), '/.ssh/authorized_keys')]",
+                    "keyData": "[parameters('AdminPasswordOrSsh')]"
                 }
             ]
         }
@@ -189,7 +201,10 @@
           }
         }
       ]
-    }
+    },
+    "_artifactslocation": "https://raw.githubusercontent.com/balticapprenticeships/azure-extensions/master",
+    "dscArchiveFolder": "DSC",
+    "dscArchiveFileName": "xBaLabServerCfg.zip"
     },
     "resources": [
       {
@@ -335,8 +350,8 @@
           },
           "osProfile": {
             "computerName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
-            "adminUsername": "[parameters('virtualMachineAdminUsername')]",
-            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('virtualMachineAdminPasswordOrSsh'), json('null'))]",
+            "adminUsername": "[parameters('AdminUsername')]",
+            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('AdminPasswordOrSsh'), json('null'))]",
             "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'Password'), json('null'), variables('linuxConfiguration'))]",
             "windowsConfiguration": "[if(equals(parameters('platform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
           },
@@ -346,7 +361,45 @@
               "enabled": false
             }
           }
-        }
+        },
+        "resources": [
+          {
+            "apiVersion": "2016-03-30",
+            "type": "extensions",
+            "name": "Microsoft.Powershell.DSC",
+            "location": "[parameters('location')]",
+            "tags": {
+              "DisplayName": "DSC",
+              "Dept": "[resourceGroup().tags['Dept']]",
+              "Created By": "[parameters('createdBy')]"
+            },
+            "dependsOn": [
+              "[resourceId('Microsoft.Compute/virtualMachines', concat(variables('vmNamePrefix'), copyIndex(1)))]"
+            ],
+            "properties": {
+              "publisher": "Microsoft.Powershell",
+              "type": "DSC",
+              "typeHandlerVersion": "2.19",
+              "autoUpgradeMinorVersion": true,
+              "settings": {
+                "wmfVersion": "latest",
+                "configuration": {
+                  "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
+                  "script": "xBaLabServerCfg.ps1",
+                  "function": "xBaLabServerCfg"
+                }
+              },
+              "protectedSettings": {
+                "configurationArguments": {
+                  "Credential": {
+                    "UserName": "[parameters('localUsername')]",
+                    "Password": "[parameters('localUserPassword')]"
+                  }
+                }
+              }
+            }
+          }
+        ]
       },          
       {
         "apiVersion": "2017-04-26-preview",
