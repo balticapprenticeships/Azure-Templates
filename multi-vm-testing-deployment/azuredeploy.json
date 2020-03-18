@@ -128,7 +128,7 @@
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
       "operatingSystemValues": {
         "Windows10Desktop": {
-            "imageValue": "Win10BaseImage"
+            "imageValue": "Win10MasterImage"
         },
         "WindowsServer2012R2": {
             "imageValue": "BAT-WS2K12R2-Image"
