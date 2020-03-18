@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "3.0.0.0",
+    "contentVersion": "3.1.0.0",
     "parameters": {
       "location": {
         "type": "string",
@@ -61,6 +61,7 @@
         "type": "string",
         "defaultValue": "Standard_D2s_v3",
         "allowedValues": [
+          "Standard_B1ms",
           "Standard_D2_v3",
           "Standard_D2s_v3",
           "Standard_DS3_v2"
@@ -139,7 +140,7 @@
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
       "operatingSystemValues": {
         "Windows10Desktop": {
-            "imageValue": "Win10BaseImage"
+            "imageValue": "Win10MasterImage"
         },
         "WindowsServer2012R2": {
             "imageValue": "BAT-WS2K12R2-Image"
@@ -355,7 +356,7 @@
             "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'Password'), json('null'), variables('linuxConfiguration'))]",
             "windowsConfiguration": "[if(equals(parameters('platform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
           },
-          "licenseType": "[if(equals(parameters('operatingSystem'), 'CustomWindowsDesktop'), variables('windowsLicense'), json('null'))]",
+          "licenseType": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), variables('windowsLicense'), json('null'))]",
           "diagnosticsProfile": {
             "bootDiagnostics": {
               "enabled": false
@@ -386,7 +387,7 @@
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
                   "script": "xBaLabServerCfg.ps1",
-                  "function": "xBaLabServerCfg"
+                  "function": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), 'xBaTestClientCfg', 'xBaLabServerWinCfg')]"
                 }
               },
               "protectedSettings": {
