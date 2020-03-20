@@ -339,7 +339,7 @@
               }
             },
             "imageReference": {
-                "id": "[concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/BalticImagesRg/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
+                "id": "[concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', if(equals(parameters('location'), 'ukwest'), 'BalticImagesRg', 'BalticImagesSouthRg'), '/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
             }
           },
           "networkProfile": {
