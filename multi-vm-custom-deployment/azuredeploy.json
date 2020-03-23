@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "3.1.0.0",
+    "contentVersion": "3.2.0.0",
     "parameters": {
       "location": {
         "type": "string",
@@ -140,13 +140,13 @@
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
       "operatingSystemValues": {
         "Windows10Desktop": {
-            "imageValue": "Win10MasterImage"
+            "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'Win10MasterImage', 'Win10MasterImageUks')]"
         },
         "WindowsServer2012R2": {
             "imageValue": "BAT-WS2K12R2-Image"
         },
         "WindowsServer2016": {
-            "imageValue": "Server2016Base-image-20200110150716"
+            "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'Server2016Base-image-20200110150716', json('null'))]"
         },
         "UbuntuServer": {
             "imageValue": "BAT-Ubuntu-Image"
@@ -339,7 +339,7 @@
               }
             },
             "imageReference": {
-                "id": "[concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/BalticImagesRg/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
+                "id": "[concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', if(equals(parameters('location'), 'ukwest'), 'BalticImagesRg', 'BalticImagesSouthRg'), '/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
             }
           },
           "networkProfile": {
