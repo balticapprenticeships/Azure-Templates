@@ -28,7 +28,7 @@
       },
       "virtualMachineCount": {
           "type": "int",
-          "maxValue": 14,
+          "maxValue": 20,
           "metadata": {
             "decription": "Number of Virtual Machines required e.g. 5"
           }
