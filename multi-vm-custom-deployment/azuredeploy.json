@@ -84,7 +84,6 @@
         "type": "string",
         "allowedValues": [
           "Windows10Desktop",
-          "WindowsServer2012R2",
           "WindowsServer2016",
           "UbuntuServer"
         ],
@@ -140,16 +139,13 @@
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
       "operatingSystemValues": {
         "Windows10Desktop": {
-            "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'Win10MasterImage', 'Win10MasterImageUks')]"
-        },
-        "WindowsServer2012R2": {
-            "imageValue": "BAT-WS2K12R2-Image"
+            "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'Win10Image_0420', 'Win10MasterImageUks')]"
         },
         "WindowsServer2016": {
-            "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'Server2016Base-image-20200110150716', json('null'))]"
+            "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'Server2016_0420', json('null'))]"
         },
         "UbuntuServer": {
-            "imageValue": "BAT-Ubuntu-Image"
+            "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'UbuntuImage', json('null'))]"
         }
     },
     "windowsConfiguration": {
