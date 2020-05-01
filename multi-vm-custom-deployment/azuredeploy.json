@@ -145,7 +145,7 @@
             "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'Server2016_0420', json('null'))]"
         },
         "UbuntuServer": {
-            "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'UbuntuImage', json('null'))]"
+            "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'UbuntuServer1804_0420', json('null'))]"
         }
     },
     "windowsConfiguration": {
