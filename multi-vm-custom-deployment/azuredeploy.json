@@ -361,6 +361,7 @@
         },
         "resources": [
           {
+            "condition": "[equals(parameters('platform'), 'Windows')]",
             "apiVersion": "2016-03-30",
             "type": "extensions",
             "name": "Microsoft.Powershell.DSC",
