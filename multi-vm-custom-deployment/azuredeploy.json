@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "3.2.1.0",
+    "contentVersion": "3.3.0.0",
     "parameters": {
       "location": {
         "type": "string",
@@ -11,12 +11,6 @@
         ],
         "metadata": {
           "description": "Location to store the resource group and all vm's."
-        }
-      },
-      "subscriptionId":{
-        "type": "string",
-        "metadata":{
-          "description": "ID of the subscription where the VM's will be created"
         }
       },
       "virtualMachineName": {
@@ -91,6 +85,16 @@
           "description": "Choose your operating system."
         }
       },
+      "imageVersion": {
+        "type": "string",
+        "defaultValue": "latest",
+        "allowedValues": [
+          "latest"
+        ],
+        "metadata": {
+          "description": "The should be the version you wish to use. To use the latest version use the default value or specify the version you want to use e.g. 1.0.0 or 1.20.4"
+        }
+      },
       "AdminUsername": {
         "type": "string",
         "metadata": {
@@ -137,15 +141,18 @@
       "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
       "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
+      "galleryImageName": "SharedImageGallery",
       "operatingSystemValues": {
         "Windows10Desktop": {
-            "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'Win10Image_0420', 'Win10MasterImageUks')]"
+            "galleryImageDefinitionName": "BA-Win10"
         },
         "WindowsServer2016": {
-            "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'Server2016_0420', json('null'))]"
+            "galleryImageDefinitionName": "BA-WinServer2016"
         },
         "UbuntuServer": {
-            "imageValue": "[if(equals(parameters('location'), 'ukwest'), 'UbuntuServer1804_0420', json('null'))]"
+
+            "galleryImageDefinitionName": "BA-UbuntuServer"
+
         }
     },
     "windowsConfiguration": {
@@ -335,7 +342,7 @@
               }
             },
             "imageReference": {
-                "id": "[concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/', if(equals(parameters('location'), 'ukwest'), 'BalticImagesRg', 'BalticImagesSouthRg'), '/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
+                "id": "[resourceId('Microsoft.Compute/galleries/images/versions', variables('galleryImageName'), variables('operatingSystemValues')[parameters('operatingSystem')].galleryImageDefinitionName, parameters('imageVersion'))]"
             }
           },
           "networkProfile": {
