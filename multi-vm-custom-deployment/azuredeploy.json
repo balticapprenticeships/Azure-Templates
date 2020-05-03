@@ -147,10 +147,10 @@
             "galleryImageDefinitionName": "BA-Win10"
         },
         "WindowsServer2016": {
-            "imageValue": "BA-WinServer2016"
+            "galleryImageDefinitionName": "BA-WinServer2016"
         },
         "UbuntuServer": {
-            "imageValue": "BA-UbuntuServer"
+            "galleryImageDefinitionName": "BA-UbuntuServer"
         }
     },
     "windowsConfiguration": {
