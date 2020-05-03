@@ -150,9 +150,7 @@
             "galleryImageDefinitionName": "BA-WinServer2016"
         },
         "UbuntuServer": {
-
             "galleryImageDefinitionName": "BA-UbuntuServer"
-
         }
     },
     "windowsConfiguration": {
