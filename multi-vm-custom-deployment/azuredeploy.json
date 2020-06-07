@@ -89,7 +89,9 @@
         "type": "string",
         "defaultValue": "latest",
         "allowedValues": [
-          "latest"
+          "latest",
+          "1.04.20",
+          "1.05.20"
         ],
         "metadata": {
           "description": "The should be the version you wish to use. To use the latest version use the default value or specify the version you want to use e.g. 1.0.0 or 1.20.4"
