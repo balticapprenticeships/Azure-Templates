@@ -41,6 +41,17 @@
           "description": "Trainer initials used to create a unique resources."
         }
       },
+      "schedule": {
+        "type": "string",
+        "defaultValue": "Yes",
+        "allowedValues": [
+          "Yes",
+          "No"
+        ],
+        "metadata": {
+          "description": "Should these VMs start automaticly at the begining of each day 'Yes' or 'No'"
+        }
+      },
       "osDiskType": {
         "type": "string",
         "defaultValue": "Standard_LRS",
@@ -321,7 +332,8 @@
         "tags": {
           "DisplayName": "VirtualMachine",
           "Dept" : "[resourceGroup().tags['Dept']]",
-          "Created By" : "[parameters('createdBy')]"
+          "Created By" : "[parameters('createdBy')]",
+          "Schedule": "[if(equals(parameters('schedule'), 'Yes'), 'StartStopDaily', 'NoSchedule')]"
         },
         "copy": {
             "name": "virtualMachineLoop",
