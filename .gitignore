@@ -2,6 +2,8 @@
 # Created by https://www.gitignore.io/api/windows,powershell,visualstudio,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=windows,powershell,visualstudio,visualstudiocode
 
+### Custom exclusions ###
+[Dd]ev/
 ### PowerShell ###
 # Exclude packaged modules
 *.zip
