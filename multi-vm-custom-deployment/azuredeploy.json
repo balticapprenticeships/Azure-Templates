@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "3.3.0.0",
+    "contentVersion": "3.3.1.0",
     "parameters": {
       "location": {
         "type": "string",
@@ -39,6 +39,17 @@
         "maxLength": 2,
         "metadata": {
           "description": "Trainer initials used to create a unique resources."
+        }
+      },
+      "schedule": {
+        "type": "string",
+        "defaultValue": "Yes",
+        "allowedValues": [
+          "Yes",
+          "No"
+        ],
+        "metadata": {
+          "description": "Should these VMs start automaticly at the begining of each day 'Yes' or 'No'"
         }
       },
       "osDiskType": {
@@ -321,7 +332,8 @@
         "tags": {
           "DisplayName": "VirtualMachine",
           "Dept" : "[resourceGroup().tags['Dept']]",
-          "Created By" : "[parameters('createdBy')]"
+          "Created By" : "[parameters('createdBy')]",
+          "Schedule": "[if(equals(parameters('schedule'), 'Yes'), 'StartStopDaily', 'NoSchedule')]"
         },
         "copy": {
             "name": "virtualMachineLoop",
