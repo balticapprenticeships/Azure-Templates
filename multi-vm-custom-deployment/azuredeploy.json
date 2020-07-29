@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "3.4.0.0",
+    "contentVersion": "3.4.1.0",
     "parameters": {
       "location": {
         "type": "string",
@@ -67,9 +67,7 @@
         "defaultValue": "Standard_D2s_v3",
         "allowedValues": [
           "Standard_B1ms",
-          "Standard_D2_v3",
-          "Standard_D2s_v3",
-          "Standard_DS3_v2"
+          "Standard_D2s_v3"
         ],
         "metadata": {
           "description": "Virtual Machine size."
