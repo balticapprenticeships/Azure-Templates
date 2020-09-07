@@ -41,6 +41,28 @@
           "description": "Trainer initials used to create a unique resources."
         }
       },
+      "schedule": {
+        "type": "string",
+        "defaultValue": "No",
+        "allowedValues": [
+          "Yes",
+          "No"
+        ],
+        "metadata": {
+          "description": "Should these VMs start automaticly at the begining of each day 'Yes' or 'No'"
+        }
+      },
+      "resourceGroupCleanup": {
+          "type": "string",
+          "defaultValue": "Disabled",
+          "allowedValues": [
+              "Disabled",
+              "Enabled"
+          ],
+          "metadata": {
+              "description": "Choose whether or not to have the VM and associated resourced automatically deleted at the end of the week"
+          }
+      },
       "osDiskType": {
         "type": "string",
         "defaultValue": "Standard_LRS",
@@ -211,14 +233,15 @@
     },
     "resources": [
       {
-        "apiVersion": "2018-10-01",
+        "apiVersion": "2019-07-01",
         "type": "Microsoft.Network/networkInterfaces",
         "name": "[concat(variables('vmNamePrefix'), copyIndex(1), '-nic')]",     
         "location": "[parameters('location')]",
         "tags": {
           "DisplayName": "NetworkInterface",
           "Dept" : "[resourceGroup().tags['Dept']]",
-          "Created By" : "[parameters('createdBy')]"
+          "Created By" : "[parameters('createdBy')]",
+          "Cleanup": "[parameters('resourceGroupCleanup')]"
         },
         "copy": {
             "name": "nicLoop",
@@ -257,19 +280,21 @@
         "tags": {
           "DisplayName": "NetworkSecurityGroup",
           "Dept" : "[resourceGroup().tags['Dept']]",
-          "Created By" : "[parameters('createdBy')]"
+          "Created By" : "[parameters('createdBy')]",
+          "Cleanup": "[parameters('resourceGroupCleanup')]"
         },
         "properties": "[if(equals(parameters('platform'), 'Windows'), variables('allowRDP'), variables('allowSSH'))]"
       },
       {
-        "apiVersion": "2019-04-01",
+        "apiVersion": "2019-09-01",
         "type": "Microsoft.Network/virtualNetworks",
         "name": "[variables('virtualNetworkName')]",      
         "location": "[parameters('location')]",
         "tags": {
           "DisplayName": "VirtualNetwork",
           "Dept" : "[resourceGroup().tags['Dept']]",
-          "Created By" : "[parameters('createdBy')]"
+          "Created By" : "[parameters('createdBy')]",
+          "Cleanup": "[parameters('resourceGroupCleanup')]"
         },        
         "properties": {
             "addressSpace": {
@@ -295,7 +320,8 @@
         "tags": {
           "DisplayName": "PublicIPAddress",
           "Dept" : "[resourceGroup().tags['Dept']]",
-          "Created By" : "[parameters('createdBy')]"
+          "Created By" : "[parameters('createdBy')]",
+          "Cleanup": "[parameters('resourceGroupCleanup')]"
         },
         "copy": {
             "name": "publicIpNameLoop",
@@ -312,14 +338,16 @@
         }
       },
       { 
-        "apiVersion": "2018-10-01",
+        "apiVersion": "2020-06-01",
         "type": "Microsoft.Compute/virtualMachines",
         "name": "[concat(variables('vmNamePrefix'), copyindex(1))]",      
         "location": "[parameters('location')]",
         "tags": {
           "DisplayName": "VirtualMachine",
           "Dept" : "[resourceGroup().tags['Dept']]",
-          "Created By" : "[parameters('createdBy')]"
+          "Created By" : "[parameters('createdBy')]",
+          "Schedule": "[if(equals(parameters('schedule'), 'Yes'), 'StartDaily', 'NoSchedule')]",
+          "Cleanup": "[parameters('resourceGroupCleanup')]"
         },
         "copy": {
             "name": "virtualMachineLoop",
@@ -375,7 +403,8 @@
             "tags": {
               "DisplayName": "DSC",
               "Dept": "[resourceGroup().tags['Dept']]",
-              "Created By": "[parameters('createdBy')]"
+              "Created By": "[parameters('createdBy')]",
+              "Cleanup": "[parameters('resourceGroupCleanup')]"
             },
             "dependsOn": [
               "[resourceId('Microsoft.Compute/virtualMachines', concat(variables('vmNamePrefix'), copyIndex(1)))]"
@@ -413,7 +442,8 @@
         "tags": {
           "DisplayName": "ShutdownSchedule",
           "Dept" : "[resourceGroup().tags['Dept']]",
-          "Created By" : "[parameters('createdBy')]"
+          "Created By" : "[parameters('createdBy')]",
+          "Cleanup": "[parameters('resourceGroupCleanup')]"
         },
         "copy": {
             "name": "shutdownLoop",
