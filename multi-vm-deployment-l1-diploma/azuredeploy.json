@@ -411,7 +411,7 @@
                 "wmfVersion": "latest",
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
-                  "script": "xBaLabCfg.ps1",
+                  "script": "xBaLabWindowsCfg.ps1",
                   "function": "[if(equals(parameters('operatingSystem'), 'Windows10Diploma'), 'xBaLabWinClientDipCfg', 'xBaLabWinServerCfg')]"
                 }
               },
