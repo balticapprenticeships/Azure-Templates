@@ -163,7 +163,7 @@
       "galleryImageName": "SharedImageGallery",
       "operatingSystemValues": {
         "Windows10Diploma": {
-            "galleryImageDefinitionName": "BA-Win10Diploma"
+            "galleryImageDefinitionName": "BA-Win10-Diploma"
         },
         "UbuntuServer": {
             "galleryImageDefinitionName": "BA-UbuntuServer"
