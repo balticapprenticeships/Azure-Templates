@@ -229,7 +229,7 @@
     },
     "_artifactslocation": "https://raw.githubusercontent.com/balticapprenticeships/azure-extensions/master",
     "dscArchiveFolder": "DSC",
-    "dscArchiveFileName": "xBaLabServerCfg.zip"
+    "dscArchiveFileName": "xBaLabWindowsCfg.zip"
     },
     "resources": [
       {
@@ -418,8 +418,8 @@
                 "wmfVersion": "latest",
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
-                  "script": "xBaLabServerCfg.ps1",
-                  "function": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), 'xBaTestClientCfg', 'xBaLabServerWinCfg')]"
+                  "script": "xBaLabWindowsCfg.ps1",
+                  "function": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), 'xBaLabWinClientCfg', 'xBaLabWinServerCfg')]"
                 }
               },
               "protectedSettings": {
