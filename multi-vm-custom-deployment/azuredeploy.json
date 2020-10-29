@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "3.4.2.0",
+    "contentVersion": "3.4.3.0",
     "parameters": {
       "location": {
         "type": "string",
@@ -126,6 +126,7 @@
       },
       "authenticationType": {
         "type": "string",
+        "minLength": 12,
         "defaultValue": "Password",
         "allowedValues": [
             "Password",
