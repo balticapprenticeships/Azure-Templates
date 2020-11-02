@@ -126,7 +126,6 @@
       },
       "authenticationType": {
         "type": "string",
-        "minLength": 12,
         "defaultValue": "Password",
         "allowedValues": [
             "Password",
@@ -137,7 +136,8 @@
         }
     },
       "AdminPasswordOrSsh": {
-        "type": "securestring",
+        "type": "securestring",        
+        "minLength": 12,
         "metadata": {
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
         }
