@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "3.4.3.0",
+    "contentVersion": "3.4.4.0",
     "parameters": {
       "location": {
         "type": "string",
@@ -111,8 +111,8 @@
         "allowedValues": [
           "latest",
           "1.10.20",
-          "1.09.20",
-          "1.08.20"
+          "1.11.20",
+          "1.12.20"
         ],
         "metadata": {
           "description": "The should be the version you wish to use. To use the latest version use the default value or specify the version you want to use e.g. 1.0.0 or 1.20.4"
