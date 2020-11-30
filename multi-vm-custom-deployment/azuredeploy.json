@@ -15,7 +15,7 @@
       },
       "virtualMachineName": {
         "type": "string",
-        "maxLength": 20,
+        "maxLength": 10,
         "metadata": {
           "description": "Virtual Machine name e.g. 306Client."
         }
