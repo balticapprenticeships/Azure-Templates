@@ -8,6 +8,7 @@
             {
                 "name": "instanceDetails",
                 "bladeTitle": "Instance Details",
+                "label": "Instance Details",
                 "elements": [
                     {
                         "name": "virtualMachineName",
