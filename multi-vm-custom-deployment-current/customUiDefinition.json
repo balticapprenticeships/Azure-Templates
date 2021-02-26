@@ -1,0 +1,257 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+    "handler": "Microsoft.Azure.CreateUIDef",
+    "version": "0.1.2-preview",
+    "parameters": {
+        "basics": [
+            {
+                "name": "instanceDetails",
+                "bladeSubtitle": "Instance Details",
+                "elements": [
+                    {
+                        "name": "virtualMachineName",
+                        "type": "Microsoft.Common.TextBlock",
+                        "label": "Virtual Machine Name",                
+                        "defaultValue": "",
+                        "constraints": {
+                            "required": true,
+                            "regex": "^[a-z0-9A-Z]{3,10}$",
+                            "validationMessage": "The VM name must be between 3 and 10 characters long and contain only letters, numbers and hyphens."
+                        },
+                        "toolTip": "This is the name of the Virtual Machine e.g. 306Client"
+                    },
+                    {
+                        "name": "virtualMachineCount",
+                        "type": "Microsoft.Common.TextBlock",
+                        "label": "Virtual Machine Count",
+                        "defaultValue": 1,
+                        "constraints": {
+                            "maxValue": 20,
+                            "regex": "[0-9]{2}$",
+                            "validationMessage": "Please choose between 1 and a maximun of 20 virtual machines.",
+                            "required": true
+                        },
+                        "toolTip": "This the number of virtual machines required e.g. 5"
+                    },
+                    {
+                        "name": "osPlatform",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "OS Platform",
+                        "defaultValue": "",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "value": "windows",
+                                    "label": "Microsoft Windows"
+                                },
+                                {
+                                    "value": "linux",
+                                    "label": "Ubuntu Linux"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "toolTip": "Here you can select the custom OS type to deploy."
+                    },
+                    {
+                        "name": "operatingSystem",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "Operating System",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "value": "Windows10Desktop",
+                                    "label": "Windows 10 Pro"
+                                },
+                                {
+                                    "value": "WindowsServer2016",
+                                    "label": "Windows Server 2016"
+                                },
+                                {
+                                    "value": "UbuntuServer",
+                                    "label": "Ubuntu Linux Server"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "toolTip": "Here you can choose the Operating System to deploy for your platform."
+        
+                    },
+                    {
+                        "name": "imageVersion",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "OS Image Version",
+                        "defaultValue": "latest",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "value": "latest",
+                                    "label": "Latest"
+                                },
+                                {
+                                    "value": "1.01.21",
+                                    "label": "January 2021"
+                                },
+                                {
+                                    "value": "1.12.20",
+                                    "label": "December 2020"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "toolTip": "Here you can select the version of the OS image you want to use."
+                    },
+                    {
+                        "name": "virtualMachineSize",
+                        "type": "Microsoft.Compute.SizeSelector",
+                        "label": "Virtual Machine Size",
+                        "recommendedSizes": [
+                            "Standard_B1ms",
+                            "Standard_D2s_v3"
+                        ],
+                        "constraints": {
+                            "required": true
+                        },
+                        "toolTip": "The is the size of the virtual machine including vCPUs and RAM"
+                    }
+                ]
+            },
+            {               
+                "name": "adminAccount",
+                "bladeSubtitle": "Administrator Account",
+                "elements": [
+                    {
+                        "condition": "[equals(parameters('platform'), 'Linux')]",
+                        "name": "authenticationType",
+                        "type": "Microsoft.Common.OptionsGroup",
+                        "defaultValue": "Password",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "value": "Password",
+                                    "label": "Password"
+                                },
+                                {
+                                    "value": "sshPublicKey",
+                                    "label": "SSH Public Key"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "toolTip": "Here you can select the type of authentication to be used on the Virtual machine. SSH is recommended for Linux VMs",
+                        "visible": true
+                    },
+                    {
+                        "name": "AdminUsername",
+                        "type": "Microsoft.Compute.UserNameTextBox",
+                        "label": "Admin Username",
+                        "defaultValue": "ITAdmin",
+                        "constraints": {
+                            "regex": "^[a-z0-9A-Z]{1,30}$",
+                            "required": true,
+                            "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
+                        },
+                        "toolTip": "Here you can specify the admin username if different from the default.",
+                        "osPlatform": "Windows",
+                        "visible": true
+                    },
+                    {
+                        "name": "AdminUsername",
+                        "type": "Microsoft.Compute.UserNameTextBox",
+                        "label": "Admin Username",
+                        "defaultValue": "ITAdmin",
+                        "constraints": {
+                            "regex": "^[a-z0-9A-Z]{1,30}$",
+                            "required": true,
+                            "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
+                        },
+                        "toolTip": "Here you can specify the admin username if different from the default.",
+                        "osPlatform": "Linux",
+                        "visible": true
+                    },
+                    {
+                        "name": "AdminPasswordOrSsh",
+                        "type": "Microsoft.Common.PasswordBox",
+                        "label": {
+                            "password": "Password",
+                            "confirmPassword": "Confirm Password"
+                        },
+                        "constraints": {
+                            "regex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
+                            "required": true,
+                            "validationMessage": "Password must be at least 12 characters long, and can contain uppercase, lower case, numbers and symbols."
+                        },
+                        "options": {
+                            "hideConfirmation": false
+                        },
+                        "visible": true
+                    }
+                ]
+            },
+            {
+                "name": "nonAdminAccount",
+                "bladeSubtitle": "Standard User Account",
+                "elements": [
+                    {
+                        "name": "localUsername",
+                        "type": "Microsoft.Compute.UserNameTextBox",
+                        "label": "Non-admin Username",
+                        "defaultValue": "Apprentice",
+                        "constraints": {
+                            "regex": "^[a-z0-9A-Z]{1,30}$",
+                            "required": true,
+                            "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
+                        },
+                        "toolTip": "Here you can specify the admin username if different from the default.",
+                        "osPlatform": "Windows",
+                        "visible": true
+                    },
+                    {
+                        "name": "localUserPassword",
+                        "type": "Microsoft.Compute.CredentialsCombo",
+                        "label": {
+                            "password": "Password",
+                            "confirmPassword": "Confirm Password"
+                        },
+                        "constraints": {
+                            "regex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
+                            "required": true,
+                            "validationMessage": "Password must be at least 12 characters long, and can contain uppercase, lower case, numbers and symbols."
+                        },
+                        "options": {
+                            "hideConfirmation": false
+                        },
+                        "osPlatform": "Windows",
+                        "visible": true
+                    }
+                ]
+            }        
+        ],
+        "steps":[
+            {
+                "name": "diskOptions",
+                "bladeTitle": "Disk",
+                "label": "Disk Options",
+                "elements": [
+                    {
+                        "name": "osDiskType",
+                        "type": "Microsoft.Common.Selector",
+                        "label": "OS Disk Type",
+                        "defaultValue": "Standard_LRS",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "value": "Standard_LRS",
+                                    "label": "Standard HDD"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "toolTip": "Select the type of storage e.g. Standard HDD, SSD or Premium"
+                    }
+                ]
+            }
+        ],
+        "outputs": {}
+    }
+}
