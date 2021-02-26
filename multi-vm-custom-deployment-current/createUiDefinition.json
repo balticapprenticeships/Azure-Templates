@@ -26,10 +26,67 @@
                                     "required": true
                                 },
                                 "toolTip": "This is the name of the Virtual Machine e.g. 306Client"
+                            },
+                            {
+                                "name": "virtualMachineCount",
+                                "type": "Microsoft.Common.TextBox",
+                                "label": "Number of Virtual Machines",
+                                "defaultValue": "",
+                                "maxValue": 20,
+                                "placeholder": "e.g. 2",
+                                "constraints": {
+                                    "regex": "^[0-9]$",
+                                    "validationMessage": "Please select the number of virtual machines to create between 1 and 20.",
+                                    "required": true
+                                },
+                                "toolTip": "Here you can select the number of virtual machine you require upto a maximum of 20."
+                            },
+                            {
+                                "name": "osPlatform",
+                                "type": "Microsoft.Common.OptionsGroup",
+                                "label": "Platform",
+                                "defaultValue": "Linux",
+                                "constraints": {
+                                    "allowedValues": [
+                                        {
+                                            "label": "Microsoft",
+                                            "value": "Windows"                                            
+                                        },
+                                        {
+                                            "label": "Linux",
+                                            "value": "Linux"                                            
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                "visible": true
+
+                            },
+                            {
+                                "name": "virtualMachineSize",
+                                "type": "Microsoft.Compute.SizeSelector",
+                                "label": "Virtual Machine Size",
+                                "recommendedSizes": [
+                                    "Standard_D2s_v3"
+                                ],
+                                "constraints": {
+                                    "allowedSizes": [
+                                        "Standard_B1ms",
+                                        "Standard_D2s_v3"
+                                    ]
+                                },
+                                "osPlatform": "[equals(steps('virtualMachineConfig').osPlatform)]",
+                                "toolTip": "Here you can select the size of your virtual machine(s), which will include the no. of vCPUs and the amount of ram.",
+                                "visible": "[if(equals(parameters('osPlatform'), 'Windows'), 'true', 'false')]"
                             }
                         ]
                     }
                 ]
+            },
+            {
+                "name": "osConfig",
+                "label": "OS Details",
+                "elements": []
             },
             {
                 "name": "userAccountConfig",
