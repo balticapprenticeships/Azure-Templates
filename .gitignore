@@ -4,6 +4,7 @@
 
 ### Custom exclusions ###
 [Dd]ev/
+testUi.json
 ### PowerShell ###
 # Exclude packaged modules
 *.zip
