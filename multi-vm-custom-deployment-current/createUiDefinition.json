@@ -33,6 +33,7 @@
                         "name": "authenticationType",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Authentication Type",
+                        "defaultValue": "Password",
                         "constraints": {
                             "allowedValues": [
                                 {
@@ -43,7 +44,8 @@
                                     "value": "sshPublicKey",
                                     "label": " SSH Public Key"
                                 }
-                            ]
+                            ],
+                            "required": true
                         },
                         "toolTip": "This is the name of the Virtual Machine e.g. 306Client"
                     }
