@@ -7,7 +7,15 @@
         "steps": [
             {
                 "name": "instanceDetails",
-                "bladeTitle": "Instance Details"
+                "bladeTitle": "Instance Details",
+                "elements": [
+                    {
+                        "name": "virtualMachineName",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Virtual Machine Name",
+                        "placeholder": "Virtual machine Config"
+                    }
+                ]
             }
         ],
         "outputs": {}
