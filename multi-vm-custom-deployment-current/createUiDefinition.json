@@ -235,8 +235,8 @@
                     {
                         "name": "osDiskType",
                         "type": "Microsoft.Common.DropDown",
-                        "bladeSubtitle": "Disk Options",
-                        "label": "OS Disk Type",
+                        "label": "Disk Options",
+                        "subLabel": "OS Disk Type",
                         "defaultValue": "Standard_LRS",
                         "constraints": {
                             "allowedValues": [
