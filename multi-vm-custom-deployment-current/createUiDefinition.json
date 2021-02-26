@@ -231,7 +231,7 @@
             {
                 "name": "diskOptions",
                 "bladeTitle": "Disk",
-                "bladeSubtitle": "Disk Options",
+                "subLabel": "Disk Options",
                 "elements": [
                     {
                         "name": "osDiskType",
