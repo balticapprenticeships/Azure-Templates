@@ -9,6 +9,10 @@
                 "name": "instanceDetails",
                 "bladeTitle": "Instance Details",
                 "label": "Instance Details",
+                "subLabel": {
+                    "preValidation": "something",
+                    "postValidation": "Done"
+                },
                 "elements": [
                     {
                         "name": "virtualMachineName",
@@ -18,7 +22,8 @@
                         "defaultValue": "",
                         "constraints": {
                             "regex": "^[a-z0-9A-Z]{3,10}$",
-                            "validationMessage": "he VM name must be between 3 and 10 characters long and contain only letters, numbers and hyphens."
+                            "validationMessage": "The VM name must be between 3 and 10 characters long and contain only letters, numbers and hyphens.",
+                            "required": true
                         },
                         "toolTip": "This is the name of the Virtual Machine e.g. 306Client"
                     }
@@ -26,8 +31,11 @@
             },
             {
                 "name": "accountDetails",
-                "bladeTitle": "User Detils",
                 "label": "User Details",
+                "subLabel": {
+                    "preValidation": "Something",
+                    "postValidation": "Done"
+                },
                 "elements": [
                     {
                         "name": "authenticationType",
@@ -47,7 +55,7 @@
                             ],
                             "required": true
                         },
-                        "toolTip": "This is the name of the Virtual Machine e.g. 306Client"
+                        "toolTip": "Here you can select the authentication method for the OS platform"
                     }
                 ]
             }
