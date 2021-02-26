@@ -3,10 +3,11 @@
     "handler": "Microsoft.Azure.CreateUIDef",
     "version": "0.1.2-preview",
     "parameters": {
-        "basics": [
+        "basics": [],
+        "steps": [
             {
                 "name": "instanceDetails",
-                "bladeSubtitle": "Instance Details",
+                "bladeTitle": "Instance Details",
                 "elements": [
                     {
                         "name": "virtualMachineName",
@@ -226,30 +227,6 @@
                     }
                 ]
             }        
-        ],
-        "steps":[
-            {
-                "name": "diskOptions",
-                "bladeTitle": "Disk",
-                "elements": [
-                    {
-                        "name": "osDiskType",
-                        "type": "Microsoft.Common.DropDown",
-                        "label": "OS Disk Type",
-                        "defaultValue": "Standard_LRS",
-                        "constraints": {
-                            "allowedValues": [
-                                {
-                                    "value": "Standard_LRS",
-                                    "label": "Standard HDD"
-                                }
-                            ],
-                            "required": true
-                        },
-                        "toolTip": "Select the type of storage e.g. Standard HDD, SSD or Premium"
-                    }
-                ]
-            }
         ],
         "outputs": {}
     }
