@@ -60,6 +60,18 @@
                                     "required": true
                                 },
                                 "toolTip": "Here you can select the number of virtual machine you require upto a maximum of 20."
+                            },
+                            {
+                                "name": "trainerInitials",
+                                "type": "Microsoft.Common.TextBox",
+                                "label": "Created By",
+                                "placeholder": "Trainer Initials",
+                                "constraints": {
+                                    "regex": "^[A-Z]{2}$",
+                                    "required": true,
+                                    "validationMessage": "This must contain a maximum of 2 uppercase letters, the firstname initial and the surname initial."
+                                },
+                                "toolTip": "Here you can enter your first name and surname"
                             },                            
                             {
                                 "name": "virtualMachineSize",
@@ -324,18 +336,7 @@
                                 },
                                 "toolTip": "Here you can enter your first name and surname"
                             },
-                            {
-                                "name": "trainerInitials",
-                                "type": "Microsoft.Common.TextBox",
-                                "label": "Created By",
-                                "placeholder": "Trainer Initials",
-                                "constraints": {
-                                    "regex": "^[A-Z]{2}$",
-                                    "required": true,
-                                    "validationMessage": "This must contain a maximum of 2 uppercase letters, the firstname initial and the surname initial."
-                                },
-                                "toolTip": "Here you can enter your first name and surname"
-                            },
+                            
                             {
                                 "name": "schedule",
                                 "type": "Microsoft.Common.OptionsGroup",
