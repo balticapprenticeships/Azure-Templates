@@ -192,7 +192,7 @@
                                 "type": "Microsoft.Common.TextBox",
                                 "label": "Administrator Username",
                                 "defaultValue": "",
-                                "placeholder": "ITAdmin",
+                                "placeholder": "e.g. ITAdmin",
                                 "constraints": {
                                     "regex": "^[a-z0-9A-Z]{3,15}$",
                                     "validationMessage": "Only alphnumeric characters are allowed, adn the username must be 3-15 characters long.",
@@ -257,7 +257,7 @@
                                 "type": "Microsoft.Common.TextBox",
                                 "label": "Standard User Username",
                                 "defaultValue": "",
-                                "placeholder": "Balticlearner1",
+                                "placeholder": "e.g. Balticlearner1",
                                 "constraints": {
                                     "regex": "^[a-z0-9A-Z]{3,15}$",
                                     "validationMessage": "Only alphnumeric characters are allowed, adn the username must be 3-15 characters long.",
@@ -294,6 +294,70 @@
                             "text": "Tags are name/value pairs that enable you to categorize resources and view consolidated billing by applying the same tag to multiple resources and resource groups."
                         }
 
+                    },
+                    {
+                        "name": "createdBy",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Created By",
+                        "placeholder": "Your name goes here",
+                        "constraints": {
+                            "regex": "^[a-zA-Z\\s]{20}[a-zA-Z]{20}&",
+                            "validationMessage": "Requires your firstname and surname and only uppercase and lowercase characters are allowed.",
+                            "required": true
+                        },
+                        "toolTip": "Here you can enter your first name and surname"
+                    },
+                    {
+                        "name": "trainerInitials",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Created By",
+                        "placeholder": "Trainer Initials",
+                        "constraints": {
+                            "regex": "^[A-Z]{2}&",
+                            "validationMessage": "Requires the trainers firstname initial and surname initial. Only uppercase characters are allowed.",
+                            "required": true
+                        },
+                        "toolTip": "Here you can enter your first name and surname"
+                    },
+                    {
+                        "name": "schedule",
+                        "type": "Microsoft.Common.OptionsGroup",
+                        "label": "Schedules Virtual Machine Start",
+                        "defaultValue": "No",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "label": "Yes",
+                                    "value": "Yes"
+                                },
+                                {
+                                    "label": "No",
+                                    "value": "No"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "toolTip": "Here you can set whether you wish to have the virtual machines auto start at 08:00."
+                    },
+                    {
+                        "name": "resourceGroupCleanup",
+                        "type": "Microsoft.Common.OptionsGroup",
+                        "label": "Resource Group Cleanup",
+                        "defaultValue": "Enable",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "label": "Enable",
+                                    "value": "Enable"
+                                },
+                                {
+                                    "label": "Disable",
+                                    "value": "Disable"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "toolTip": "Here you can set whether you wish to have the resources e.g. virtual machines, virtual network etc. removed from the resource group on the next Friday @ 17:00."
                     }
                 ]
             }
