@@ -33,8 +33,6 @@
       },
       "trainerInitials": {
         "type": "string",
-        "minLength": 2,
-        "maxLength": 2,
         "metadata": {
           "description": "Trainer initials used to create a unique resources."
         }
