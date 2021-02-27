@@ -8,7 +8,7 @@
       "AdminUsername": {
         "value": "GEN-UNIQUE"
       },
-      "AdminPasswordOrSsh": {
+      "AdminPassword": {
         "value": "GEN-PASSWORD"
       }
     }
