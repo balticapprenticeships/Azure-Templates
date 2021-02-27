@@ -35,7 +35,7 @@
                         "label": "Virtual Machine Instance",
                         "elements": [
                             {
-                                "name": "virtualMchineName",
+                                "name": "virtualMachineName",
                                 "type": "Microsoft.Common.TextBox",
                                 "label": "Virtual Machine Name",
                                 "placeholder": "e.g. 306Client",
