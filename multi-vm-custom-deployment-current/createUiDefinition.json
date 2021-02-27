@@ -35,7 +35,7 @@
                         "label": "Virtual Machine Instance",
                         "elements": [
                             {
-                                "name": "virtualMachineName",
+                                "name": "vmName",
                                 "type": "Microsoft.Common.TextBox",
                                 "label": "Virtual Machine Name",
                                 "placeholder": "e.g. 306Client",
@@ -288,7 +288,7 @@
                                 "constraints": {
                                     "regex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?!.*\\s)[a-zA-z\\d]{12,20}$",
                                     "validationMessage": "The password must be at least 12 - 20 characters long, contain at least 1 uppercase and lowercase letter, 1 number and an optional special character.",
-                                    "required": true
+                                    "required": false
                                 },
                                 "toolTip": "Here you can set the password for the standard user account for your virtual machine(s)."
                             }
