@@ -15,14 +15,12 @@
       },
       "virtualMachineName": {
         "type": "string",
-        "maxLength": 10,
         "metadata": {
           "description": "Virtual Machine name e.g. 306Client."
         }
       },
       "virtualMachineCount": {
           "type": "int",
-          "maxValue": 20,
           "metadata": {
             "decription": "Number of Virtual Machines required e.g. 5"
           }
@@ -135,15 +133,13 @@
         }
     },
       "AdminPassword": {
-        "type": "securestring",        
-        "minLength": 12,
+        "type": "securestring",
         "metadata": {
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
         }
       },
       "sshPublicKey": {
-        "type": "securestring",        
-        "minLength": 12,
+        "type": "securestring",
         "metadata": {
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
         }
@@ -156,7 +152,6 @@
       },
       "localUserPassword": {
         "type": "securestring",
-        "minLength": 12,
         "metadata":{
           "description": "None admin user password. If Linux SSH is recommended."
         }
