@@ -134,7 +134,14 @@
           "descriptopn": "The type of authentication used on the virtual machine. SSH is recommended for Linux VMs"
         }
     },
-      "AdminPasswordOrSsh": {
+      "AdminPassword": {
+        "type": "securestring",        
+        "minLength": 12,
+        "metadata": {
+          "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
+        }
+      },
+      "sshPublicKey": {
         "type": "securestring",        
         "minLength": 12,
         "metadata": {
@@ -189,7 +196,7 @@
             "publicKeys": [
                 {
                     "path": "[concat('/home/', parameters('AdminUsername'), '/.ssh/authorized_keys')]",
-                    "keyData": "[parameters('AdminPasswordOrSsh')]"
+                    "keyData": "[parameters('sshPublicKey')]"
                 }
             ]
         }
@@ -383,7 +390,7 @@
           "osProfile": {
             "computerName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
             "adminUsername": "[parameters('AdminUsername')]",
-            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('AdminPasswordOrSsh'), json('null'))]",
+            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('AdminPassword'), json('null'))]",
             "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'Password'), json('null'), variables('linuxConfiguration'))]",
             "windowsConfiguration": "[if(equals(parameters('osPlatform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
           },
