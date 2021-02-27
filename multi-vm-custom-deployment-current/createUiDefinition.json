@@ -270,7 +270,7 @@
                                 "type": "Microsoft.Common.TextBox",
                                 "label": "Standard User Username",
                                 "defaultValue": "",
-                                "placeholder": "e.g. Balticlearner1",
+                                "placeholder": "e.g. Apprentice",
                                 "constraints": {
                                     "regex": "^[a-z0-9A-Z]{3,15}$",
                                     "validationMessage": "Only alphnumeric characters are allowed, adn the username must be 3-15 characters long.",
@@ -318,8 +318,6 @@
                                 "label": "Created By",
                                 "placeholder": "Your name goes here",
                                 "constraints": {
-                                    "regex": "^[a-zA-Z\\s]{20}[a-zA-Z]{20}&",
-                                    "validationMessage": "Requires your firstname and surname and only uppercase and lowercase characters are allowed.",
                                     "required": true
                                 },
                                 "toolTip": "Here you can enter your first name and surname"
@@ -330,8 +328,6 @@
                                 "label": "Created By",
                                 "placeholder": "Trainer Initials",
                                 "constraints": {
-                                    "regex": "^[A-Z]{2}&",
-                                    "validationMessage": "Requires the trainers firstname initial and surname initial. Only uppercase characters are allowed.",
                                     "required": true
                                 },
                                 "toolTip": "Here you can enter your first name and surname"
