@@ -55,7 +55,7 @@
                                 "maxValue": 20,
                                 "placeholder": "e.g. 2",
                                 "constraints": {
-                                    "regex": "^[0-9]$",
+                                    "regex": "^[0-9]{1,2}$",
                                     "validationMessage": "Please select the number of virtual machines to create between 1 and 20.",
                                     "required": true
                                 },
@@ -318,6 +318,8 @@
                                 "label": "Created By",
                                 "placeholder": "Your name goes here",
                                 "constraints": {
+                                    "regex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[\\s]){40}[a-zA-Z]+\\s[a-zA-Z]+$",
+                                    "validationMessage": "Must contain only letter and one space between your first name and surname.",
                                     "required": true
                                 },
                                 "toolTip": "Here you can enter your first name and surname"
@@ -328,7 +330,9 @@
                                 "label": "Created By",
                                 "placeholder": "Trainer Initials",
                                 "constraints": {
-                                    "required": true
+                                    "regex": "^[A-Z]{2}$",
+                                    "required": true,
+                                    "validationMessage": "This must contain a maximum of 2 uppercase letters, the firstname initial and the surname initial."
                                 },
                                 "toolTip": "Here you can enter your first name and surname"
                             },
