@@ -199,54 +199,54 @@
                                     "required": true
                                 },
                                 "toolTip": "Here you can choose the Administrator username for you virtual machine(s)."
+                            },
+                            {
+                                "name": "authenticationType",
+                                "type": "Microsoft.Common.OptionsGroup",
+                                "label": "Authentication Type",
+                                "defaultValue": "Password",
+                                "constraints": {
+                                    "allowedValues": [
+                                        {
+                                            "label": "Password",
+                                            "value": "Password"
+                                        },
+                                        {
+                                            "label": "SSH Public Key",
+                                            "value": "sshPublicKey"
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                "toolTip": "Here you can select the auhentication type for your virtual machine(s) to either Password or SSH. SSH is recommended for Linux."
+                            },
+                            {
+                                "name": "AdminPassword",
+                                "type": "Microsoft.Common.PasswordBox",
+                                "label": {
+                                    "password": "Password",
+                                    "confirmPassword": "Confirm Password"
+                                },
+                                "constraints": {
+                                    "regex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?!.*\\s)[a-zA-z\\d]{12,20}$",
+                                    "validationMessage": "The password must be at least 12 - 20 characters long, contain at least 1 uppercase and lowercase letter, 1 number and an optional special character.",
+                                    "required": false
+                                },
+                                "toolTip": "Here you can set the password for the administrator account if using password authentication."
+                            },
+                            {
+                                "name": "sshPublicKey",
+                                "type": "Microsoft.Common.TextBox",
+                                "label": "SSH Public Key",
+                                "placeholder": "ONLY FOR SSH AUTHENTICATION",
+                                "constraints": {
+                                    "validationMessage": "Provide an RSA public key in the single-line format (starting with \"ssh-rsa\") or the multi-line PEM format. You can generate SSH keys using ssh-keygen on Linux and OS X, or PuTTYGen on Windows.",
+                                    "required": false
+                                },
+                                "toolTip": "Provide an RSA public key in the single-line format (starting with \"ssh-rsa\") or the multi-line PEM format. You can generate SSH keys using ssh-keygen on Linux and OS X, or PuTTYGen on Windows."
                             }
                         ]
-                    },
-                    {
-                        "name": "authenticationType",
-                        "type": "Microsoft.Common.OptionsGroup",
-                        "label": "Authentication Type",
-                        "defaultValue": "Password",
-                        "constraints": {
-                            "allowedValues": [
-                                {
-                                    "label": "Password",
-                                    "value": "Password"
-                                },
-                                {
-                                    "label": "SSH Public Key",
-                                    "value": "sshPublicKey"
-                                }
-                            ],
-                            "required": true
-                        },
-                        "toolTip": "Here you can select the auhentication type for your virtual machine(s) to either Password or SSH. SSH is recommended for Linux."
-                    },
-                    {
-                        "name": "AdminPassword",
-                        "type": "Microsoft.Common.PasswordBox",
-                        "label": {
-                            "password": "Password",
-                            "confirmPassword": "Confirm Password"
-                        },
-                        "constraints": {
-                            "regex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?!.*\\s)[a-zA-z\\d]{12,20}$",
-                            "validationMessage": "The password must be at least 12 - 20 characters long, contain at least 1 uppercase and lowercase letter, 1 number and an optional special character.",
-                            "required": false
-                        },
-                        "toolTip": "Here you can set the password for the administrator account if using password authentication."
-                    },
-                    {
-                        "name": "sshPublicKey",
-                        "type": "Microsoft.Common.TextBox",
-                        "label": "SSH Public Key",
-                        "placeholder": "ONLY FOR SSH AUTHENTICATION",
-                        "constraints": {
-                            "validationMessage": "Provide an RSA public key in the single-line format (starting with \"ssh-rsa\") or the multi-line PEM format. You can generate SSH keys using ssh-keygen on Linux and OS X, or PuTTYGen on Windows.",
-                            "required": false
-                        },
-                        "toolTip": "Provide an RSA public key in the single-line format (starting with \"ssh-rsa\") or the multi-line PEM format. You can generate SSH keys using ssh-keygen on Linux and OS X, or PuTTYGen on Windows."
-                    },
+                    },                    
                     {
                         "name": "userAccountConfig",
                         "type": "Microsoft.Common.Section",
@@ -291,74 +291,95 @@
                         "name": "tagsMessage",
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
-                            "text": "Tags are name/value pairs that enable you to categorize resources and view consolidated billing by applying the same tag to multiple resources and resource groups."
+                            "text": "These Tags are name/value pairs which are used to enable various administrative and maintenance functions within the Microsoft Azure cloud service."
                         }
-
                     },
                     {
-                        "name": "createdBy",
-                        "type": "Microsoft.Common.TextBox",
-                        "label": "Created By",
-                        "placeholder": "Your name goes here",
-                        "constraints": {
-                            "regex": "^[a-zA-Z\\s]{20}[a-zA-Z]{20}&",
-                            "validationMessage": "Requires your firstname and surname and only uppercase and lowercase characters are allowed.",
-                            "required": true
-                        },
-                        "toolTip": "Here you can enter your first name and surname"
-                    },
-                    {
-                        "name": "trainerInitials",
-                        "type": "Microsoft.Common.TextBox",
-                        "label": "Created By",
-                        "placeholder": "Trainer Initials",
-                        "constraints": {
-                            "regex": "^[A-Z]{2}&",
-                            "validationMessage": "Requires the trainers firstname initial and surname initial. Only uppercase characters are allowed.",
-                            "required": true
-                        },
-                        "toolTip": "Here you can enter your first name and surname"
-                    },
-                    {
-                        "name": "schedule",
-                        "type": "Microsoft.Common.OptionsGroup",
-                        "label": "Schedules Virtual Machine Start",
-                        "defaultValue": "No",
-                        "constraints": {
-                            "allowedValues": [
-                                {
-                                    "label": "Yes",
-                                    "value": "Yes"
+                        "name": "mngTagsConfig",
+                        "type": "Microsoft.Common.Section",
+                        "label": "VM Management Tags",
+                        "elements": [
+                            {
+                                "name": "createdBy",
+                                "type": "Microsoft.Common.TextBox",
+                                "label": "Created By",
+                                "placeholder": "Your name goes here",
+                                "constraints": {
+                                    "regex": "^[a-zA-Z\\s]{20}[a-zA-Z]{20}&",
+                                    "validationMessage": "Requires your firstname and surname and only uppercase and lowercase characters are allowed.",
+                                    "required": true
                                 },
-                                {
-                                    "label": "No",
-                                    "value": "No"
-                                }
-                            ],
-                            "required": true
-                        },
-                        "toolTip": "Here you can set whether you wish to have the virtual machines auto start at 08:00."
+                                "toolTip": "Here you can enter your first name and surname"
+                            },
+                            {
+                                "name": "trainerInitials",
+                                "type": "Microsoft.Common.TextBox",
+                                "label": "Created By",
+                                "placeholder": "Trainer Initials",
+                                "constraints": {
+                                    "regex": "^[A-Z]{2}&",
+                                    "validationMessage": "Requires the trainers firstname initial and surname initial. Only uppercase characters are allowed.",
+                                    "required": true
+                                },
+                                "toolTip": "Here you can enter your first name and surname"
+                            },
+                            {
+                                "name": "schedule",
+                                "type": "Microsoft.Common.OptionsGroup",
+                                "label": "Schedules Virtual Machine Start",
+                                "defaultValue": "No",
+                                "constraints": {
+                                    "allowedValues": [
+                                        {
+                                            "label": "Yes",
+                                            "value": "Yes"
+                                        },
+                                        {
+                                            "label": "No",
+                                            "value": "No"
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                "toolTip": "Here you can set whether you wish to have the virtual machines auto start at 08:00."
+                            },
+                            {
+                                "name": "resourceGroupCleanup",
+                                "type": "Microsoft.Common.OptionsGroup",
+                                "label": "Resource Group Cleanup",
+                                "defaultValue": "Enable",
+                                "constraints": {
+                                    "allowedValues": [
+                                        {
+                                            "label": "Enable",
+                                            "value": "Enable"
+                                        },
+                                        {
+                                            "label": "Disable",
+                                            "value": "Disable"
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                "toolTip": "Here you can set whether you wish to have the resources e.g. virtual machines, virtual network etc. removed from the resource group on the next Friday @ 17:00."
+                            }
+                        ]
                     },
                     {
-                        "name": "resourceGroupCleanup",
-                        "type": "Microsoft.Common.OptionsGroup",
-                        "label": "Resource Group Cleanup",
-                        "defaultValue": "Enable",
-                        "constraints": {
-                            "allowedValues": [
-                                {
-                                    "label": "Enable",
-                                    "value": "Enable"
-                                },
-                                {
-                                    "label": "Disable",
-                                    "value": "Disable"
-                                }
-                            ],
-                            "required": true
-                        },
-                        "toolTip": "Here you can set whether you wish to have the resources e.g. virtual machines, virtual network etc. removed from the resource group on the next Friday @ 17:00."
-                    }
+                        "name": "additionalTagsByResource",
+                        "type": "Microsoft.Common.Section",
+                        "label": "Additional Resource Tags",
+                        "elements": [
+                            {
+                                "name": "tagsByResource",
+                                "type": "Microsoft.Common.TagsByResource",
+                                "resources": [
+                                    "Microsoft.Compute/virtualMachines",
+                                    "microsoft.Storage/storageAccounts"
+                                ]
+                            }
+                        ]
+                    }                    
                 ]
             }
         ],
