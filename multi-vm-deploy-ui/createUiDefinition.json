@@ -16,24 +16,10 @@
                 }
             }
         },
-        "basics": [
-            {
-                "name": "vmName",
-                "type": "Microsoft.Common.TextBox",
-                "label": "Virtual Machine Name",
-                "placeholder": "e.g. 306Client",
-                "defaultValue": "",
-                "constraints": {
-                    "regex": "^[a-z0-9A-Z]{3,10}$",
-                    "validationMessage": "The VM name must be between 3 and 10 characters long and contain only letters, numbers and hyphens.",
-                    "required": true
-                },
-                "toolTip": "This is the name of the Virtual Machine e.g. 306Client"
-            }
-        ],
+        "basics": [],
         "steps": [
             {
-                "name": "virtualMachineConfig",
+                "name": "vmConfig",
                 "label": "Virtual Machine Configuration",
                 "elements": [
                     {
@@ -44,12 +30,25 @@
                         }
                     },
                     {
-                        "name": "virtualMachineInstance",
+                        "name": "vmInstance",
                         "type": "Microsoft.Common.Section",
                         "label": "Virtual Machine Instance",
                         "elements": [
                             {
-                                "name": "virtualMachineCount",
+                                "name": "vmName",
+                                "type": "Microsoft.Common.TextBox",
+                                "label": "Virtual Machine Name",
+                                "placeholder": "e.g. 306Client",
+                                "defaultValue": "",
+                                "constraints": {
+                                    "regex": "^[a-z0-9A-Z]{3,10}$",
+                                    "validationMessage": "The VM name must be between 3 and 10 characters long and contain only letters, numbers and hyphens.",
+                                    "required": true
+                                },
+                                "toolTip": "This is the name of the Virtual Machine e.g. 306Client"
+                            },
+                            {
+                                "name": "vmCount",
                                 "type": "Microsoft.Common.TextBox",
                                 "label": "Number of Virtual Machines",
                                 "defaultValue": "",
@@ -63,7 +62,7 @@
                                 "toolTip": "Here you can select the number of virtual machine you require upto a maximum of 20."
                             },                            
                             {
-                                "name": "virtualMachineSize",
+                                "name": "vmSize",
                                 "type": "Microsoft.Common.DropDown",
                                 "label": "Virtual Machine Size",
                                 "constraints": {
@@ -197,12 +196,12 @@
                         }
                     },
                     {
-                        "name": "adminAccountConfig",
+                        "name": "auacConfig",
                         "type": "Microsoft.Common.Section",
                         "label": "Administrator Account",
                         "elements": [
                             {
-                                "name": "AdminUsername",
+                                "name": "adminUsername",
                                 "type": "Microsoft.Common.TextBox",
                                 "label": "Administrator Username",
                                 "defaultValue": "",
@@ -235,7 +234,7 @@
                                 "toolTip": "Here you can select the auhentication type for your virtual machine(s) to either Password or SSH. SSH is recommended for Linux."
                             },
                             {
-                                "name": "AdminPassword",
+                                "name": "adminPassword",
                                 "type": "Microsoft.Common.PasswordBox",
                                 "label": {
                                     "password": "Password",
@@ -262,7 +261,7 @@
                         ]
                     },                    
                     {
-                        "name": "userAccountConfig",
+                        "name": "suacConfig",
                         "type": "Microsoft.Common.Section",
                         "label": "Standard User Account",
                         "elements": [
@@ -397,6 +396,25 @@
                 ]
             }
         ],
-        "outputs": {}
+        "outputs": {
+            "vmName": "[steps('vmConfig').vmName]",
+            "vmCount": "[steps('vmConfig').vmCount]",
+            "vmSize": "[steps('vmConfig').vmSize]",
+            "osDiskType": "[steps('vmConfig').osDiskType]",
+            "osPlatform": "[steps('osCOnfig').osPlatform]",
+            "operatingSystem": "[steps('osConfig').operatingSystem]",
+            "imageVersion": "[steps('osConfig').imageVersion]",
+            "adminUsername": "[steps('userAccountConfig').adminUsername]",
+            "authenticationType": "[steps('userAccountConfig').authenticationType]",
+            "adminPassword": "[steps('userAccountConfig').adminPassword]",
+            "sshPublicKey": "[steps('userAccountCOnfig').sshPublicKey]",
+            "localUsername": "[steps('userAccountConfig').localUsername]",
+            "localUserPassword": "[steps('userAccountConfig').localUserPassword]",
+            "createdBy": "[steps('tags').createdBy]",
+            "trainerInitials": "[steps('tags').trainerInitials]",
+            "schedule": "[steps('tags').schedule]",
+            "resourGroupCleanup": "[steps('tags').resourceGroupCleanup]",
+            "tagsByResource": "[steps('tags').tagsByResource]"
+        }
     }
 }
