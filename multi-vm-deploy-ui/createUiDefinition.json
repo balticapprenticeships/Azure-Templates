@@ -49,19 +49,6 @@
                         "label": "Virtual Machine Instance",
                         "elements": [
                             {
-                                "name": "vmName",
-                                "type": "Microsoft.Common.TextBox",
-                                "label": "Virtual Machine Name",
-                                "placeholder": "e.g. 306Client",
-                                "defaultValue": "",
-                                "constraints": {
-                                    "regex": "^[a-z0-9A-Z]{3,10}$",
-                                    "validationMessage": "The VM name must be between 3 and 10 characters long and contain only letters, numbers and hyphens.",
-                                    "required": true
-                                },
-                                "toolTip": "This is the name of the Virtual Machine e.g. 306Client"
-                            },
-                            {
                                 "name": "virtualMachineCount",
                                 "type": "Microsoft.Common.TextBox",
                                 "label": "Number of Virtual Machines",
