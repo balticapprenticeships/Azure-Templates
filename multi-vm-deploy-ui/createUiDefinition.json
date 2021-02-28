@@ -255,7 +255,7 @@
                                 "placeholder": "ONLY FOR SSH AUTHENTICATION",
                                 "constraints": {
                                     "validationMessage": "Provide an RSA public key in the single-line format (starting with \"ssh-rsa\") or the multi-line PEM format. You can generate SSH keys using ssh-keygen on Linux and OS X, or PuTTYGen on Windows.",
-                                    "required": false
+                                    "required": true
                                 },
                                 "toolTip": "Provide an RSA public key in the single-line format (starting with \"ssh-rsa\") or the multi-line PEM format. You can generate SSH keys using ssh-keygen on Linux and OS X, or PuTTYGen on Windows.",
                                 "visible": "[equals(steps('userAccountConfig').auacConfig.authenticationType, 'sshPublicKey')]"
