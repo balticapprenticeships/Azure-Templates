@@ -19,7 +19,7 @@
           "description": "Virtual Machine name e.g. 306Client."
         }
       },
-      "virtualMachineCount": {
+      "vmCount": {
           "type": "int",
           "metadata": {
             "decription": "Number of Virtual Machines required e.g. 5"
@@ -69,7 +69,7 @@
           "description": "Type of storage Standard HDD, SSD or Premium."
         }
       },
-      "virtualMachineSize": {
+      "vmSize": {
         "type": "string",
         "defaultValue": "Standard_D2s_v3",
         "allowedValues": [
@@ -113,7 +113,7 @@
           "description": "The should be the version you wish to use. To use the latest version use the default value or specify the version you want to use e.g. 1.0.0 or 1.20.4"
         }
       },
-      "AdminUsername": {
+      "adminUsername": {
         "type": "string",
         "metadata": {
           "description": "Admin username for the Virtual Machine."
@@ -130,7 +130,7 @@
           "descriptopn": "The type of authentication used on the virtual machine. SSH is recommended for Linux VMs"
         }
     },
-      "AdminPassword": {
+      "adminPassword": {
         "type": "securestring",
         "metadata": {
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
@@ -188,7 +188,7 @@
         "ssh": {
             "publicKeys": [
                 {
-                    "path": "[concat('/home/', parameters('AdminUsername'), '/.ssh/authorized_keys')]",
+                    "path": "[concat('/home/', parameters('adminUsername'), '/.ssh/authorized_keys')]",
                     "keyData": "[parameters('sshPublicKey')]"
                 }
             ]
@@ -246,7 +246,7 @@
         },
         "copy": {
             "name": "nicLoop",
-            "count": "[parameters('virtualMachineCount')]"
+            "count": "[parameters('vmCount')]"
         },
         "dependsOn": [
           "[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]",
@@ -326,7 +326,7 @@
         },
         "copy": {
             "name": "publicIpNameLoop",
-            "count": "[parameters('virtualMachineCount')]"
+            "count": "[parameters('vmCount')]"
         },
         "properties": {
           "publicIPAllocationMethod": "Dynamic",
@@ -352,14 +352,14 @@
         },
         "copy": {
             "name": "virtualMachineLoop",
-            "count": "[parameters('virtualMachineCount')]"
+            "count": "[parameters('vmCount')]"
         },
         "dependsOn": [
           "[concat('Microsoft.Network/networkInterfaces/', variables('vmNamePrefix'), copyindex(1), '-nic')]"
         ],
         "properties": {
           "hardwareProfile": {
-            "vmSize": "[parameters('virtualMachineSize')]"
+            "vmSize": "[parameters('vmSize')]"
           },
           "storageProfile": {
             "osDisk": {
@@ -382,8 +382,8 @@
           },
           "osProfile": {
             "computerName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
-            "adminUsername": "[parameters('AdminUsername')]",
-            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('AdminPassword'), json('null'))]",
+            "adminUsername": "[parameters('adminUsername')]",
+            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('adminPassword'), json('null'))]",
             "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'Password'), json('null'), variables('linuxConfiguration'))]",
             "windowsConfiguration": "[if(equals(parameters('osPlatform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
           },
@@ -448,7 +448,7 @@
         },
         "copy": {
             "name": "shutdownLoop",
-            "count": "[parameters('virtualMachineCount')]"
+            "count": "[parameters('vmCount')]"
         },
         "dependsOn": [
           "[concat('Microsoft.Compute/virtualMachines/', variables('vmNamePrefix'), copyIndex(1))]"
