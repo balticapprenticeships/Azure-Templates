@@ -397,24 +397,24 @@
             }
         ],
         "outputs": {
-            "vmName": "[steps('vmConfig').vmName]",
-            "vmCount": "[steps('vmConfig').vmCount]",
-            "vmSize": "[steps('vmConfig').vmSize]",
-            "osDiskType": "[steps('vmConfig').osDiskType]",
-            "osPlatform": "[steps('osCOnfig').osPlatform]",
+            "vmName": "[steps('vmConfig').vmInstance.vmName]",
+            "vmCount": "[steps('vmConfig').vmInstance.vmCount]",
+            "vmSize": "[steps('vmConfig').vmInstance.vmSize]",
+            "osDiskType": "[steps('vmConfig').vmInstance.osDiskType]",
+            "osPlatform": "[steps('osConfig').osPlatform]",
             "operatingSystem": "[steps('osConfig').operatingSystem]",
             "imageVersion": "[steps('osConfig').imageVersion]",
-            "adminUsername": "[steps('userAccountConfig').adminUsername]",
-            "authenticationType": "[steps('userAccountConfig').authenticationType]",
-            "adminPassword": "[steps('userAccountConfig').adminPassword]",
-            "sshPublicKey": "[steps('userAccountCOnfig').sshPublicKey]",
-            "localUsername": "[steps('userAccountConfig').localUsername]",
-            "localUserPassword": "[steps('userAccountConfig').localUserPassword]",
-            "createdBy": "[steps('tags').createdBy]",
-            "trainerInitials": "[steps('tags').trainerInitials]",
-            "schedule": "[steps('tags').schedule]",
-            "resourGroupCleanup": "[steps('tags').resourceGroupCleanup]",
-            "tagsByResource": "[steps('tags').tagsByResource]"
+            "adminUsername": "[steps('userAccountConfig').auacConfig.adminUsername]",
+            "authenticationType": "[steps('userAccountConfig').auacConfig.authenticationType]",
+            "adminPassword": "[steps('userAccountConfig').auacConfig.adminPassword]",
+            "sshPublicKey": "[steps('userAccountCOnfig').auacConfig.sshPublicKey]",
+            "localUsername": "[steps('userAccountConfig').suacConfig.localUsername]",
+            "localUserPassword": "[steps('userAccountConfig').suacConfig.localUserPassword]",
+            "createdBy": "[steps('tags').mngTagsConfig.createdBy]",
+            "trainerInitials": "[steps('tags').mngTagsConfig.trainerInitials]",
+            "schedule": "[steps('tags').mngTagsConfig.schedule]",
+            "resourGroupCleanup": "[steps('tags').mngTagsConfig.resourceGroupCleanup]",
+            "tagsByResource": "[steps('tags').additionalTagsByResource.tagsByResource]"
         }
     }
 }
