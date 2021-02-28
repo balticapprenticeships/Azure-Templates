@@ -274,7 +274,7 @@
                                 "constraints": {
                                     "regex": "^[a-z0-9A-Z]{3,15}$",
                                     "validationMessage": "Only alphnumeric characters are allowed, adn the username must be 3-15 characters long.",
-                                    "required": true
+                                    "required": false
                                 },
                                 "toolTip": "Here you can choose the standard user username for you virtual machine(s)."
                             },
@@ -407,7 +407,7 @@
             "adminUsername": "[steps('userAccountConfig').auacConfig.adminUsername]",
             "authenticationType": "[steps('userAccountConfig').auacConfig.authenticationType]",
             "adminPassword": "[steps('userAccountConfig').auacConfig.adminPassword]",
-            "sshPublicKey": "[steps('userAccountCOnfig').auacConfig.sshPublicKey]",
+            "sshPublicKey": "[steps('userAccountConfig').auacConfig.sshPublicKey]",
             "localUsername": "[steps('userAccountConfig').suacConfig.localUsername]",
             "localUserPassword": "[steps('userAccountConfig').suacConfig.localUserPassword]",
             "createdBy": "[steps('tags').mngTagsConfig.createdBy]",
