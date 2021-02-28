@@ -276,7 +276,8 @@
                                     "validationMessage": "Only alphnumeric characters are allowed, adn the username must be 3-15 characters long.",
                                     "required": false
                                 },
-                                "toolTip": "Here you can choose the standard user username for you virtual machine(s)."
+                                "toolTip": "Here you can choose the standard user username for you virtual machine(s).",
+                                "visible": "[if(equals(steps('osConfig').osPlatform, 'Windows'), 'true', 'flase')]"
                             },
                             {
                                 "name": "localUserPassword",
@@ -290,7 +291,8 @@
                                     "validationMessage": "The password must be at least 12 - 20 characters long, contain at least 1 uppercase and lowercase letter, 1 number and an optional special character.",
                                     "required": false
                                 },
-                                "toolTip": "Here you can set the password for the standard user account for your virtual machine(s)."
+                                "toolTip": "Here you can set the password for the standard user account for your virtual machine(s).",
+                                "visible": "[if(equals(steps('osConfig').osPlatform, 'Windows'), 'true', 'flase')]"
                             }
                         ]
                     }
