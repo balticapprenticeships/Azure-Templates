@@ -136,7 +136,7 @@
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
         }
       },
-      "sshPublicKey": {
+      "sshPublicKeyString": {
         "type": "securestring",
         "metadata": {
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
@@ -189,7 +189,7 @@
             "publicKeys": [
                 {
                     "path": "[concat('/home/', parameters('adminUsername'), '/.ssh/authorized_keys')]",
-                    "keyData": "[parameters('sshPublicKey')]"
+                    "keyData": "[parameters('sshPublicKeyString')]"
                 }
             ]
         }

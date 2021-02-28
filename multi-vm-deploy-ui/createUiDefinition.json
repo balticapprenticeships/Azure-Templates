@@ -249,7 +249,7 @@
                                 "visible": "[equals(steps('userAccountConfig').auacConfig.authenticationType, 'Password')]"
                             },
                             {
-                                "name": "sshPublicKey",
+                                "name": "sshPublicKeyString",
                                 "type": "Microsoft.Common.TextBox",
                                 "label": "SSH Public Key",
                                 "placeholder": "ONLY FOR SSH AUTHENTICATION",
@@ -410,7 +410,7 @@
             "adminUsername": "[steps('userAccountConfig').auacConfig.adminUsername]",
             "authenticationType": "[steps('userAccountConfig').auacConfig.authenticationType]",
             "adminPassword": "[steps('userAccountConfig').auacConfig.adminPassword]",
-            "sshPublicKey": "[steps('userAccountConfig').auacConfig.sshPublicKey]",
+            "sshPublicKeyString": "[steps('userAccountConfig').auacConfig.sshPublicKeyString]",
             "localUsername": "[steps('userAccountConfig').suacConfig.localUsername]",
             "localUserPassword": "[steps('userAccountConfig').suacConfig.localUserPassword]",
             "createdBy": "[steps('tags').mngTagsConfig.createdBy]",
