@@ -243,20 +243,23 @@
                                 "constraints": {
                                     "regex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?!.*\\s)[a-zA-z\\d]{12,20}$",
                                     "validationMessage": "The password must be at least 12 - 20 characters long, contain at least 1 uppercase and lowercase letter, 1 number and an optional special character.",
-                                    "required": false
+                                    "required": true
                                 },
-                                "toolTip": "Here you can set the password for the administrator account if using password authentication."
+                                "toolTip": "Here you can set the password for the administrator account if using password authentication.",
+                                "visible": "[equals(steps('userAccountConfig').auacConfig.authenticationType, 'Password')]"
                             },
                             {
                                 "name": "sshPublicKey",
                                 "type": "Microsoft.Common.TextBox",
                                 "label": "SSH Public Key",
+                                "defaultValue": "",
                                 "placeholder": "ONLY FOR SSH AUTHENTICATION",
                                 "constraints": {
                                     "validationMessage": "Provide an RSA public key in the single-line format (starting with \"ssh-rsa\") or the multi-line PEM format. You can generate SSH keys using ssh-keygen on Linux and OS X, or PuTTYGen on Windows.",
-                                    "required": false
+                                    "required": true
                                 },
-                                "toolTip": "Provide an RSA public key in the single-line format (starting with \"ssh-rsa\") or the multi-line PEM format. You can generate SSH keys using ssh-keygen on Linux and OS X, or PuTTYGen on Windows."
+                                "toolTip": "Provide an RSA public key in the single-line format (starting with \"ssh-rsa\") or the multi-line PEM format. You can generate SSH keys using ssh-keygen on Linux and OS X, or PuTTYGen on Windows.",
+                                "visible": "[equals(steps('userAccountConfig').auacConfig.authenticationType, 'sshPublicKey')]"
                             }
                         ]
                     },                    
@@ -274,10 +277,9 @@
                                 "constraints": {
                                     "regex": "^[a-z0-9A-Z]{3,15}$",
                                     "validationMessage": "Only alphnumeric characters are allowed, adn the username must be 3-15 characters long.",
-                                    "required": false
+                                    "required": true
                                 },
-                                "toolTip": "Here you can choose the standard user username for you virtual machine(s).",
-                                "visible": "[if(equals(steps('osConfig').osPlatform, 'Windows'), 'true', 'flase')]"
+                                "toolTip": "Here you can choose the standard user username for you virtual machine(s)."
                             },
                             {
                                 "name": "localUserPassword",
@@ -289,12 +291,12 @@
                                 "constraints": {
                                     "regex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?!.*\\s)[a-zA-z\\d]{12,20}$",
                                     "validationMessage": "The password must be at least 12 - 20 characters long, contain at least 1 uppercase and lowercase letter, 1 number and an optional special character.",
-                                    "required": false
+                                    "required": true
                                 },
-                                "toolTip": "Here you can set the password for the standard user account for your virtual machine(s).",
-                                "visible": "[if(equals(steps('osConfig').osPlatform, 'Windows'), 'true', 'flase')]"
+                                "toolTip": "Here you can set the password for the standard user account for your virtual machine(s)."
                             }
-                        ]
+                        ],
+                        "visible": "[equals(steps('osConfig').osPlatform, 'Windows')]"
                     }
                 ]
             },
