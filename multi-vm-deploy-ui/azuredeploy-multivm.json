@@ -145,12 +145,14 @@
       },
       "localUsername": {
         "type": "string",
+        "defaultValue": "",
         "metadata":{
           "description": "None admin username"
         }
       },
       "localUserPassword": {
         "type": "securestring",
+        "defaultValue": "",
         "metadata":{
           "description": "None admin user password. If Linux SSH is recommended."
         }
