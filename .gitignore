@@ -6,6 +6,7 @@
 [Dd]ev/
 testUi.json
 demoUi.json
+[Aa]rchive
 ### PowerShell ###
 # Exclude packaged modules
 *.zip
