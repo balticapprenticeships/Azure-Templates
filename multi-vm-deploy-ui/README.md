@@ -1,4 +1,3 @@
-# FOR DEMO USE ONLY - DO NOT USE!!!!!
 # Multi VM Deployment to Azure UK Regions
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fbalticapprenticeships%2FAzure-Templates%2Fmaster%2Fmulti-vm-deploy-ui%2Fazuredeploy-multivm.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fbalticapprenticeships%2FAzure-Templates%2Fmaster%2Fmulti-vm-deploy-ui%2FcreateUiDefinition.json)
