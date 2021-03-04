@@ -115,6 +115,14 @@
             "description": "Admin username for the Virtual Machine."
             }
         },
+        "authenticationType": {
+          "type": "string",
+          "defaultValue": "Password",
+          "allowedValues": [
+            "Password",
+            "sshPublicKey"
+          ]
+        },
         "adminPassword": {
             "type": "securestring",
             "metadata": {
@@ -330,7 +338,7 @@
           "osProfile": {
             "computerName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
             "adminUsername": "[parameters('adminUsername')]",
-            "adminPassword": "[parameters('adminPassword')]",
+            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('adminPassword'), json('null'))]",
             "windowsConfiguration": "[if(equals(parameters('osPlatform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
           },
           "licenseType": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), variables('windowsLicense'), json('null'))]",
