@@ -93,9 +93,7 @@
         "operatingSystem": {
             "type": "string",
             "allowedValues": [
-                "Windows10Desktop",
-                "WindowsServer2016",
-                "UbuntuServer"
+                "Windows10Diploma"
             ],
             "metadata": {
             "description": "Choose your operating system."
@@ -106,8 +104,7 @@
             "defaultValue": "latest",
             "allowedValues": [
                 "latest",
-                "1.01.21",
-                "1.12.20"
+                "1.09.20"
             ],
             "metadata": {
             "description": "The should be the version you wish to use. To use the latest version use the default value or specify the version you want to use e.g. 1.0.0 or 1.20.4"
@@ -117,17 +114,6 @@
             "type": "string",
             "metadata": {
             "description": "Admin username for the Virtual Machine."
-            }
-        },
-        "authenticationType": {
-            "type": "string",
-            "defaultValue": "Password",
-            "allowedValues": [
-                "Password",
-                "sshPublicKey"
-            ],
-            "metadata": {
-            "descriptopn": "The type of authentication used on the virtual machine. SSH is recommended for Linux VMs"
             }
         },
         "adminPassword": {
@@ -351,7 +337,7 @@
           "osProfile": {
             "computerName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
             "adminUsername": "[parameters('adminUsername')]",
-            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('adminPassword'), json('null'))]",
+            "adminPassword": "[parameters('adminPassword')]",
             "windowsConfiguration": "[if(equals(parameters('osPlatform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
           },
           "licenseType": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), variables('windowsLicense'), json('null'))]",
