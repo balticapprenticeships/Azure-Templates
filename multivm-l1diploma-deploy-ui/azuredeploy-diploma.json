@@ -341,7 +341,7 @@
             "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('adminPassword'), json('null'))]",
             "windowsConfiguration": "[if(equals(parameters('osPlatform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
           },
-          "licenseType": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), variables('windowsLicense'), json('null'))]",
+          "licenseType": "[if(equals(parameters('operatingSystem'), 'Windows10Diploma'), variables('windowsLicense'), json('null'))]",
           "diagnosticsProfile": {
             "bootDiagnostics": {
               "enabled": false
@@ -374,7 +374,7 @@
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
                   "script": "xBaLabWindowsCfg.ps1",
-                  "function": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), 'xBaLabWinClientCfg', 'xBaLabWinServerCfg')]"
+                  "function": "[if(equals(parameters('operatingSystem'), 'Windows10Diploma'), 'xBaLabWinClientDipCfg', 'xBaLabWinClientCfg')]"
                 }
               },
               "protectedSettings": {
