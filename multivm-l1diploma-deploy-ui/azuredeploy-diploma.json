@@ -156,7 +156,7 @@
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
         "galleryImageName": "SharedImageGallery",
         "operatingSystemValues": {
-        "Windows10Desktop": {
+        "Windows10Diploma": {
             "galleryImageDefinitionName": "BA-Win10-Diploma"
         }
     },
