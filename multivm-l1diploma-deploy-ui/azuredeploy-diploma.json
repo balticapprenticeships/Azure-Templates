@@ -231,7 +231,7 @@
           "Created By" : "[parameters('createdBy')]",
           "Cleanup": "[parameters('resourceGroupCleanup')]"
         },
-        "properties": "[if(equals(parameters('osPlatform'), 'Windows'), variables('allowRDP'), variables('allowSSH'))]"
+        "properties": "[variables('allowRDP')]"
       },
       {
         "apiVersion": "2019-09-01",
