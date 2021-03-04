@@ -1,0 +1,445 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "3.4.1.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": "ukwest",
+            "allowedValues": [
+                "ukwest",
+                "uksouth"
+            ],
+            "metadata": {
+            "description": "Location to store the resource group and all vm's."
+            }
+        },
+        "vmName": {
+            "type": "string",
+            "metadata": {
+            "description": "Virtual Machine name e.g. 306Client."
+            }
+        },
+        "vmCount": {
+            "type": "int",
+            "metadata": {
+                "decription": "Number of Virtual Machines required e.g. 5"
+            }
+        },
+        "createdBy":{
+            "type": "string",
+            "metadata": {
+            "description": "Please enter your name 'Firstname Surname'"
+            }
+        },
+        "trainerInitials": {
+            "type": "string",
+            "metadata": {
+            "description": "Trainer initials used to create a unique resources."
+            }
+        },
+        "schedule": {
+            "type": "string",
+            "defaultValue": "No",
+            "allowedValues": [
+                "Yes",
+                "No"
+            ],
+            "metadata": {
+            "description": "Should these VMs start automaticly at the begining of each day 'Yes' or 'No'"
+            }
+        },
+        "resourceGroupCleanup": {
+            "type": "string",
+            "defaultValue": "Disabled",
+            "allowedValues": [
+                "Disabled",
+                "Enabled"
+            ],
+            "metadata": {
+                "description": "Choose whether or not to have the VM and associated resourced automatically deleted at the end of the week"
+            }
+        },
+        "osDiskType": {
+            "type": "string",
+            "defaultValue": "Standard_LRS",
+            "allowedValues": [
+                "Standard_LRS"
+            ],
+            "metadata": {
+            "description": "Type of storage Standard HDD, SSD or Premium."
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "defaultValue": "Standard_D2s_v3",
+            "allowedValues": [
+                "Standard_B1ms",
+                "Standard_D2s_v3"
+            ],
+            "metadata": {
+            "description": "Virtual Machine size."
+            }
+        },
+        "osPlatform": {
+            "type": "string",
+            "allowedValues": [
+                "Windows",
+                "Linux"
+            ],
+            "metadata": {
+                "description": "Select the custom OS type to deploy"
+            }
+        },
+        "operatingSystem": {
+            "type": "string",
+            "allowedValues": [
+                "Windows10Desktop",
+                "WindowsServer2016",
+                "UbuntuServer"
+            ],
+            "metadata": {
+            "description": "Choose your operating system."
+            }
+        },
+        "imageVersion": {
+            "type": "string",
+            "defaultValue": "latest",
+            "allowedValues": [
+                "latest",
+                "1.01.21",
+                "1.12.20"
+            ],
+            "metadata": {
+            "description": "The should be the version you wish to use. To use the latest version use the default value or specify the version you want to use e.g. 1.0.0 or 1.20.4"
+            }
+        },
+        "adminUsername": {
+            "type": "string",
+            "metadata": {
+            "description": "Admin username for the Virtual Machine."
+            }
+        },
+        "authenticationType": {
+            "type": "string",
+            "defaultValue": "Password",
+            "allowedValues": [
+                "Password",
+                "sshPublicKey"
+            ],
+            "metadata": {
+            "descriptopn": "The type of authentication used on the virtual machine. SSH is recommended for Linux VMs"
+            }
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+            "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
+            }
+        },
+        "localUsername": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata":{
+            "description": "None admin username"
+            }
+        },
+        "localUserPassword": {
+            "type": "securestring",
+            "defaultValue": "",
+            "metadata":{
+            "description": "None admin user password. If Linux SSH is recommended."
+            }
+        }      
+    },
+    "variables": {
+        "networkSecurityGroupName": "[concat(resourceGroup().name, '-nsg')]",
+        "vmNamePrefix": "[toUpper(concat(parameters('vmName'), parameters('trainerInitials')))]",
+        "virtualNetworkName": "[concat(resourceGroup().name, '-vnet')]",
+        "addressPrefixes": "10.0.0.0/16",
+        "subnetsAddressPrefix": "10.0.0.0/24",
+        "subnetName": "Default",
+        "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
+        "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
+        "galleryImageName": "SharedImageGallery",
+        "operatingSystemValues": {
+        "Windows10Desktop": {
+            "galleryImageDefinitionName": "BA-Win10"
+        },
+        "WindowsServer2016": {
+            "galleryImageDefinitionName": "BA-WinServer2016"
+        },
+        "UbuntuServer": {
+            "galleryImageDefinitionName": "BA-UbuntuServer"
+        }
+    },
+    "windowsConfiguration": {
+        "enableAutomaticUpdates": true,
+        "provisionVMAgent": true,
+        "timeZone": "GMT Standard Time"
+    },
+    "windowsLicense": "Windows_Client",
+        "allowRDP":{
+            "securityRules": [
+            {
+                "name": "Allow-RDP",
+                "properties": {
+                "priority": 300,
+                "protocol": "Tcp",
+                "access": "Allow",
+                "direction": "Inbound",
+                "sourceAddressPrefix": "*",
+                "sourcePortRange": "*",
+                "destinationAddressPrefix": "*",
+                "destinationPortRange": "3389"
+            }
+            }
+        ]
+    },
+    "_artifactslocation": "https://raw.githubusercontent.com/balticapprenticeships/azure-extensions/master",
+    "dscArchiveFolder": "DSC",
+    "dscArchiveFileName": "xBaLabWindowsCfg.zip"
+    },
+    "resources": [
+      {
+        "apiVersion": "2019-07-01",
+        "type": "Microsoft.Network/networkInterfaces",
+        "name": "[concat(variables('vmNamePrefix'), copyIndex(1), '-nic')]",     
+        "location": "[parameters('location')]",
+        "tags": {
+          "DisplayName": "NetworkInterface",
+          "Dept" : "[resourceGroup().tags['Dept']]",
+          "Created By" : "[parameters('createdBy')]",
+          "Cleanup": "[parameters('resourceGroupCleanup')]"
+        },
+        "copy": {
+            "name": "nicLoop",
+            "count": "[parameters('vmCount')]"
+        },
+        "dependsOn": [
+          "[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]",
+          "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
+          "[concat('Microsoft.Network/publicIpAddresses/', variables('vmNamePrefix'), copyindex(1), '-ip')]"
+        ],
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "ipconfig1",
+              "properties": {
+                "subnet": {
+                  "id": "[variables('subnetRef')]"
+                },
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIpAddress": {
+                  "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/publicIpAddresses', concat(variables('vmNamePrefix'), copyIndex(1), '-ip'))]"
+                }
+              }
+            }
+          ],
+          "networkSecurityGroup": {
+            "id": "[variables('nsgId')]"
+          }
+        }
+      },
+      {
+        "apiVersion": "2019-02-01",
+        "type": "Microsoft.Network/networkSecurityGroups",
+        "name": "[variables('networkSecurityGroupName')]",      
+        "location": "[parameters('location')]",
+        "tags": {
+          "DisplayName": "NetworkSecurityGroup",
+          "Dept" : "[resourceGroup().tags['Dept']]",
+          "Created By" : "[parameters('createdBy')]",
+          "Cleanup": "[parameters('resourceGroupCleanup')]"
+        },
+        "properties": "[if(equals(parameters('osPlatform'), 'Windows'), variables('allowRDP'), variables('allowSSH'))]"
+      },
+      {
+        "apiVersion": "2019-09-01",
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[variables('virtualNetworkName')]",      
+        "location": "[parameters('location')]",
+        "tags": {
+          "DisplayName": "VirtualNetwork",
+          "Dept" : "[resourceGroup().tags['Dept']]",
+          "Created By" : "[parameters('createdBy')]",
+          "Cleanup": "[parameters('resourceGroupCleanup')]"
+        },        
+        "properties": {
+            "addressSpace": {
+            "addressPrefixes": [
+                "[variables('addressPrefixes')]"
+            ]
+            },
+            "subnets": [
+            {
+                "name": "[variables('subnetName')]",
+                "properties": {
+                "addressPrefix": "[variables('subnetsAddressPrefix')]"
+                }
+            }
+            ]
+        }
+      },
+      {
+        "apiVersion": "2019-02-01",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "name": "[concat(variables('vmNamePrefix'), copyIndex(1), '-ip')]",      
+        "location": "[parameters('location')]",
+        "tags": {
+          "DisplayName": "PublicIPAddress",
+          "Dept" : "[resourceGroup().tags['Dept']]",
+          "Created By" : "[parameters('createdBy')]",
+          "Cleanup": "[parameters('resourceGroupCleanup')]"
+        },
+        "copy": {
+            "name": "publicIpNameLoop",
+            "count": "[parameters('vmCount')]"
+        },
+        "properties": {
+          "publicIPAllocationMethod": "Dynamic",
+          "dnsSettings": {
+            "domainNameLabel": "[toLower(concat('baltic-', variables('vmNamePrefix'), copyindex(1)))]"
+          }
+        },
+        "sku": {
+          "name": "Basic"
+        }
+      },
+      { 
+        "apiVersion": "2020-06-01",
+        "type": "Microsoft.Compute/virtualMachines",
+        "name": "[concat(variables('vmNamePrefix'), copyindex(1))]",      
+        "location": "[parameters('location')]",
+        "tags": {
+          "DisplayName": "VirtualMachine",
+          "Dept" : "[resourceGroup().tags['Dept']]",
+          "Created By" : "[parameters('createdBy')]",
+          "Schedule": "[if(equals(parameters('schedule'), 'Yes'), 'StartDaily', 'NoSchedule')]",
+          "Cleanup": "[parameters('resourceGroupCleanup')]"
+        },
+        "copy": {
+            "name": "virtualMachineLoop",
+            "count": "[parameters('vmCount')]"
+        },
+        "dependsOn": [
+          "[concat('Microsoft.Network/networkInterfaces/', variables('vmNamePrefix'), copyindex(1), '-nic')]"
+        ],
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "[parameters('vmSize')]"
+          },
+          "storageProfile": {
+            "osDisk": {
+              "name": "[concat(variables('vmNamePrefix'), copyIndex(1), '-osdisk')]",
+              "createOption": "FromImage",
+              "managedDisk": {
+                "storageAccountType": "[parameters('osDiskType')]"
+              }
+            },
+            "imageReference": {
+                "id": "[resourceId('Microsoft.Compute/galleries/images/versions', variables('galleryImageName'), variables('operatingSystemValues')[parameters('operatingSystem')].galleryImageDefinitionName, parameters('imageVersion'))]"
+            }
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('vmNamePrefix'), copyIndex(1), '-nic'))]"
+              }
+            ]
+          },
+          "osProfile": {
+            "computerName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
+            "adminUsername": "[parameters('adminUsername')]",
+            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('adminPassword'), json('null'))]",
+            "windowsConfiguration": "[if(equals(parameters('osPlatform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
+          },
+          "licenseType": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), variables('windowsLicense'), json('null'))]",
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "enabled": false
+            }
+          }
+        },
+        "resources": [
+          {
+            "condition": "[equals(parameters('osPlatform'), 'Windows')]",
+            "apiVersion": "2016-03-30",
+            "type": "extensions",
+            "name": "Microsoft.Powershell.DSC",
+            "location": "[parameters('location')]",
+            "tags": {
+              "DisplayName": "DSC",
+              "Dept": "[resourceGroup().tags['Dept']]",
+              "Created By": "[parameters('createdBy')]",
+              "Cleanup": "[parameters('resourceGroupCleanup')]"
+            },
+            "dependsOn": [
+              "[resourceId('Microsoft.Compute/virtualMachines', concat(variables('vmNamePrefix'), copyIndex(1)))]"
+            ],
+            "properties": {
+              "publisher": "Microsoft.Powershell",
+              "type": "DSC",
+              "typeHandlerVersion": "2.19",
+              "autoUpgradeMinorVersion": true,
+              "settings": {
+                "wmfVersion": "latest",
+                "configuration": {
+                  "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
+                  "script": "xBaLabWindowsCfg.ps1",
+                  "function": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), 'xBaLabWinClientCfg', 'xBaLabWinServerCfg')]"
+                }
+              },
+              "protectedSettings": {
+                "configurationArguments": {
+                  "Credential": {
+                    "UserName": "[parameters('localUsername')]",
+                    "Password": "[parameters('localUserPassword')]"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },          
+      {
+        "apiVersion": "2017-04-26-preview",
+        "type": "Microsoft.DevTestLab/schedules",
+        "name": "[concat('shutdown-computevm-', variables('vmNamePrefix'),  copyIndex(1))]",      
+        "location": "[parameters('location')]",
+        "tags": {
+          "DisplayName": "ShutdownSchedule",
+          "Dept" : "[resourceGroup().tags['Dept']]",
+          "Created By" : "[parameters('createdBy')]",
+          "Cleanup": "[parameters('resourceGroupCleanup')]"
+        },
+        "copy": {
+            "name": "shutdownLoop",
+            "count": "[parameters('vmCount')]"
+        },
+        "dependsOn": [
+          "[concat('Microsoft.Compute/virtualMachines/', variables('vmNamePrefix'), copyIndex(1))]"
+        ],
+        "properties": {
+          "status": "Enabled",
+          "taskType": "ComputeVmShutdownTask",
+          "dailyRecurrence": {
+            "time": "17:00"
+          },
+          "timeZoneId": "GMT Standard Time",
+          "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', concat(variables('vmNamePrefix'), copyIndex(1)))]",
+          "notificationSettings": {
+            "status": "Disabled",
+            "notificationLocale": "en",
+            "timeInMinutes": "30"
+          }
+        }
+      }
+    ],
+    "outputs": {
+      "VirtualMachineDomain":{
+        "type": "string",
+        "value": ""
+      }
+    }
+  }
