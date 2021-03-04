@@ -83,8 +83,7 @@
         "osPlatform": {
             "type": "string",
             "allowedValues": [
-                "Windows",
-                "Linux"
+                "Windows"
             ],
             "metadata": {
                 "description": "Select the custom OS type to deploy"
@@ -150,13 +149,7 @@
         "galleryImageName": "SharedImageGallery",
         "operatingSystemValues": {
         "Windows10Desktop": {
-            "galleryImageDefinitionName": "BA-Win10"
-        },
-        "WindowsServer2016": {
-            "galleryImageDefinitionName": "BA-WinServer2016"
-        },
-        "UbuntuServer": {
-            "galleryImageDefinitionName": "BA-UbuntuServer"
+            "galleryImageDefinitionName": "BA-Win10-Diploma"
         }
     },
     "windowsConfiguration": {

@@ -162,12 +162,8 @@
                                     "value": "latest"
                                 },
                                 {
-                                    "label": "January 2021",
-                                    "value": "1.01.21"
-                                },
-                                {
-                                    "label": "February 2021",
-                                    "value": "1.02.21"
+                                    "label": "October 2020",
+                                    "value": "1.09.20"
                                 }
                             ],
                             "required": true
