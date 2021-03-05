@@ -218,7 +218,7 @@
                             {
                                 "name": "adminUsernameLinux",
                                 "type": "Microsoft.Compute.UserNameTextBox",
-                                "label": "Linux Administrator Username",
+                                "label": "Administrator Username",
                                 "defaultValue": "",
                                 "constraints": {
                                     "regex": "^[a-z0-9A-Z]{3,15}$",
@@ -417,7 +417,7 @@
             "osPlatform": "[steps('osConfig').osPlatform]",
             "operatingSystem": "[steps('osConfig').operatingSystem]",
             "imageVersion": "[steps('osConfig').imageVersion]",
-            "adminUsername": "[steps('userAccountConfig').auacConfig.adminUsername]",
+            "adminUsername": "[coalesce(steps('userAccountConfig').auacConfig.adminUsername, steps('userAccountConfig').auacConfig.adminUsernameLinux)]",
             "authenticationType": "[coalesce(steps('userAccountConfig').auacConfig.adminPassword.authenticationType, steps('userAccountConfig').auacConfig.adminPasswordOrSsh.authenticationType)]",
             "adminPassword": "[steps('userAccountConfig').auacConfig.adminPassword.password]",
             "adminPasswordOrSsh": "[coalesce(steps('userAccountConfig').auacConfig.adminPasswordOrSsh.password, steps('userAccountConfig').auacConfig.adminPasswordOrSsh.sshPublicKey)]",
