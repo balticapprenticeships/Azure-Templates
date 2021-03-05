@@ -387,7 +387,7 @@
           "osProfile": {
             "computerName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
             "adminUsername": "[parameters('adminUsername')]",
-            "adminPassword": "[if(coalesce(parameters('authenticationType'), 'Password'), parameters('adminPassword'), parameters('adminPasswordOrSsh'))]",
+            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), coalesce(parameters('adminPassword'), parameters('adminPasswordOrSsh')), json('null'))]",
             "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'Password'), json('null'), variables('linuxConfiguration'))]",
             "windowsConfiguration": "[if(equals(parameters('osPlatform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
           },
