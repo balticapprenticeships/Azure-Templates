@@ -121,9 +121,9 @@
       },
       "authenticationType": {
         "type": "string",
-        "defaultValue": "Password",
+        "defaultValue": "password",
         "allowedValues": [
-            "Password",
+            "password",
             "sshPublicKey"
         ],
         "metadata": {
