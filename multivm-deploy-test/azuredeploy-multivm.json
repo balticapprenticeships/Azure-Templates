@@ -130,25 +130,16 @@
           "descriptopn": "The type of authentication used on the virtual machine. SSH is recommended for Linux VMs"
         }
       },
-      "authenticationTypeL": {
-        "type": "string",
-        "defaultValue": "Password",
-        "allowedValues": [
-            "Password",
-            "sshPublicKey"
-        ],
-        "metadata": {
-          "descriptopn": "The type of authentication used on the virtual machine. SSH is recommended for Linux VMs"
-        }
-      },
       "adminPassword": {
         "type": "securestring",
+        "defaultValue": null,
         "metadata": {
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
         }
       },
       "adminPasswordOrSsh": {
         "type": "securestring",
+        "defaultValue": null,
         "metadata": {
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
         }
