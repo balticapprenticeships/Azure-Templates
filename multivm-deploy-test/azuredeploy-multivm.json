@@ -132,7 +132,7 @@
       },
       "adminPassword": {
         "type": "securestring",
-        "defaultValue": null,
+        "defaultValue": "",
         "metadata": {
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
         }
@@ -231,22 +231,6 @@
           }
         }
       ]
-    },
-    "windowsOsProfile": {
-      "computerName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
-      "adminUsername": "[parameters('adminUsername')]",
-      "adminPassword": "[parameters('adminPassword')]",
-      "windowsConfiguration": {
-        "enableAutomaticUpdates": true,
-        "provisionVMAgent": true,
-        "timeZone": "GMT Standard Time"
-      }
-    },
-    "linuxOsProfile": {
-      "computerName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
-      "adminUsername": "[parameters('adminUsername')]",
-      "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('adminPasswordOrSsh'), json('null'))]",
-      "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'Password'), json('null'), variables('linuxConfiguration'))]"
     },
     "_artifactslocation": "https://raw.githubusercontent.com/balticapprenticeships/azure-extensions/master",
     "dscArchiveFolder": "DSC",
@@ -400,7 +384,13 @@
               }
             ]
           },
-          "osProfile": "[if(equals(parameters('osPlatform'), 'Windows'), variables('windowsOsProfile'), variables('linuxOsProfile'))]",
+          "osProfile": {
+            "computerName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
+            "adminUsername": "[parameters('adminUsername')]",
+            "adminPassword": "[if(coalesce(parameters('authenticationType'), 'Password'), parameters('adminPassword'), parameters('adminPasswordOrSsh'))]",
+            "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'Password'), json('null'), variables('linuxConfiguration'))]",
+            "windowsConfiguration": "[if(equals(parameters('osPlatform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
+          },
           "licenseType": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), variables('windowsLicense'), json('null'))]",
           "diagnosticsProfile": {
             "bootDiagnostics": {
