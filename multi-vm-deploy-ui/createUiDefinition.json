@@ -364,7 +364,7 @@
                                 "name": "resourceGroupCleanup",
                                 "type": "Microsoft.Common.OptionsGroup",
                                 "label": "Resource Group Cleanup",
-                                "defaultValue": "Enable",
+                                "defaultValue": "Enabled",
                                 "constraints": {
                                     "allowedValues": [
                                         {
