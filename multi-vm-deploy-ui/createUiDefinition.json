@@ -368,11 +368,11 @@
                                 "constraints": {
                                     "allowedValues": [
                                         {
-                                            "label": "Enable",
+                                            "label": "Enabled",
                                             "value": "Enabled"
                                         },
                                         {
-                                            "label": "Disable",
+                                            "label": "Disabled",
                                             "value": "Disabled"
                                         }
                                     ],
