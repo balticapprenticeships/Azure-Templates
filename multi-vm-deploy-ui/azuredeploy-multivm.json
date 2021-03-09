@@ -39,7 +39,7 @@
       },
       "schedule": {
         "type": "string",
-        "defaultValue": "",
+        "defaultValue": "No",
         "allowedValues": [
           "Yes",
           "No"
@@ -50,7 +50,7 @@
       },
       "resourceGroupCleanup": {
           "type": "string",
-          "defaultValue": "",
+          "defaultValue": "Enabled",
           "allowedValues": [
               "Disabled",
               "Enabled"
