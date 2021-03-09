@@ -369,11 +369,11 @@
                                     "allowedValues": [
                                         {
                                             "label": "Enable",
-                                            "value": "Enable"
+                                            "value": "Enabled"
                                         },
                                         {
                                             "label": "Disable",
-                                            "value": "Disable"
+                                            "value": "Disabled"
                                         }
                                     ],
                                     "required": true
