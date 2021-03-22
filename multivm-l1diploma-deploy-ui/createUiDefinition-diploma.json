@@ -210,7 +210,7 @@
                                     "confirmPassword": "Confirm Password"
                                 },
                                 "constraints": {
-                                    "customPasswordRegex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?!.*\\s)[a-zA-z\\d]{12,20}$",
+                                    "customPasswordRegex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\w~!@#$%&^*])(?!.*\\s)[a-zA-z\\d\\w~!@#$%&^*]{12,20}$",
                                     "customValidationMessage": "The password must be at least 12 - 20 characters long, contain at least 1 uppercase and lowercase letter, 1 number and an optional special character.",
                                     "required": true
                                 },
@@ -248,7 +248,7 @@
                                     "confirmPassword": "Confirm Password"
                                 },
                                 "constraints": {
-                                    "regex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?!.*\\s)[a-zA-z\\d]{12,20}$",
+                                    "regex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\w~!@#$%&^*])(?!.*\\s)[a-zA-z\\d\\w~!@#$%&^*]{12,20}$",
                                     "validationMessage": "The password must be at least 12 - 20 characters long, contain at least 1 uppercase and lowercase letter, 1 number and an optional special character.",
                                     "required": true
                                 },
