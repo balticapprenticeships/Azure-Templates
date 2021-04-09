@@ -147,10 +147,6 @@
                                     "value": "Windows10Desktop"
                                 },
                                 {
-                                    "label": "Windows 10 Testing",
-                                    "value": "Windows10Testing"
-                                },
-                                {
                                     "label": "Windows Server 2016",
                                     "value": "WindowsServer2016"
                                 },
@@ -173,10 +169,6 @@
                                 {
                                     "label": "Latest",
                                     "value": "latest"
-                                },
-                                {
-                                    "label": "April 2021",
-                                    "value": "1.04.21"
                                 },
                                 {
                                     "label": "January 2021",

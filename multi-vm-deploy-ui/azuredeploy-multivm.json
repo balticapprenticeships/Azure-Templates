@@ -94,7 +94,6 @@
         "type": "string",
         "allowedValues": [
           "Windows10Desktop",
-          "Windows10Testing",
           "WindowsServer2016",
           "UbuntuServer"
         ],
@@ -107,7 +106,6 @@
         "defaultValue": "latest",
         "allowedValues": [
           "latest",
-          "1.04.21",
           "1.01.21",
           "1.12.20"
         ],
@@ -174,9 +172,6 @@
       "operatingSystemValues": {
         "Windows10Desktop": {
             "galleryImageDefinitionName": "BA-Win10"
-        },
-        "Windows10Testing": {
-            "galleryImageDefinitionName": "BA-Win10-Testing"
         },
         "WindowsServer2016": {
             "galleryImageDefinitionName": "BA-WinServer2016"
