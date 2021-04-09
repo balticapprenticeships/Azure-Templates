@@ -353,7 +353,6 @@
             "operatingSystem": "[steps('osConfig').operatingSystem]",
             "imageVersion": "[steps('osConfig').imageVersion]",
             "adminUsername": "[steps('userAccountConfig').auacConfig.adminUsername]",
-            "authenticationType": "[steps('userAccountConfig').auaConfig.adminPassword.authenticationType]",
             "adminPassword": "[steps('userAccountConfig').auacConfig.adminPassword.password]",
             "localUsername": "[steps('userAccountConfig').suacConfig.localUsername]",
             "localUserPassword": "[steps('userAccountConfig').suacConfig.localUserPassword]",
