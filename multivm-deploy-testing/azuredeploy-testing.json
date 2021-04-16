@@ -179,7 +179,7 @@
       "galleryImageName": "SharedImageGallery",
       "operatingSystemValues": {
         "WindowsTesting": {
-            "galleryImageDefinitionName": "BA-Win10-Testing"
+            "galleryImageDefinitionName": "BA-Testing"
         },
         "WindowsServer2016": {
             "galleryImageDefinitionName": "BA-WinServer2016"
