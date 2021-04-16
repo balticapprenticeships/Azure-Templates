@@ -113,6 +113,21 @@
           "description": "The should be the version you wish to use. To use the latest version use the default value or specify the version you want to use e.g. 1.0.0 or 1.20.4"
         }
       },
+      "patchMode": {
+        "type": "string",
+        "defaultValue": "AutomaticByOS",
+        "allowedValues": [
+          "AutomaticByOS"
+        ]
+      },
+      "enableHotpatching": {
+        "type": "bool",
+        "defaultValue": false,
+        "allowedValues": [
+          false,
+          true
+        ]
+      },
       "adminUsername": {
         "type": "string",
         "metadata": {
@@ -173,7 +188,11 @@
     "windowsConfiguration": {
         "enableAutomaticUpdates": true,
         "provisionVMAgent": true,
-        "timeZone": "GMT Standard Time"
+        "timeZone": "GMT Standard Time",
+        "patchSettings": {
+          "enableHotpatching": "[parameters('enableHotpatching')]",
+          "patchMode": "[parameters('patchMode')]"
+        }
     },
     "windowsLicense": "Windows_Client",
     "allowRDP":{
@@ -304,7 +323,7 @@
         }
       },
       { 
-        "apiVersion": "2020-06-01",
+        "apiVersion": "2020-12-01",
         "type": "Microsoft.Compute/virtualMachines",
         "name": "[concat(variables('vmNamePrefix'), copyindex(1))]",      
         "location": "[parameters('location')]",
@@ -436,7 +455,11 @@
     "outputs": {
       "VirtualMachineDomain":{
         "type": "string",
-        "value": ""
+        "value": "[toLower(concat('baltic-', variables('vmNamePrefix'), copyindex(1)))]"
+      },
+      "adminUsername": {
+        "type": "string",
+        "value": "[parameters('adminUsername')]"
       }
     }
   }
