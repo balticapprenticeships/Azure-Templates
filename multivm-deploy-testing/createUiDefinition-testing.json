@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
     "handler": "Microsoft.Azure.CreateUIDef",
     "version": "0.1.2-preview",
-    "currentVersion": "1.0.0.0",
+    "currentVersion": "2.0.0.0",
     "parameters": {
         "config": {
             "isWizard": true,
@@ -137,16 +137,12 @@
                         "name": "operatingSystem",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Operating System",
-                        "defaultValue": "Windows 10 Pro",
+                        "defaultValue": "Windows Testing",
                         "constraints": {
                             "allowedValues": [
                                 {
                                     "label": "Windows Testing",
                                     "value": "WindowsTesting"
-                                },
-                                {
-                                    "label": "Windows 10 Pro",
-                                    "value": "Windows10Diploma"
                                 }
                             ],
                             "required": true
@@ -166,11 +162,7 @@
                                 },
                                 {
                                     "label": "April",
-                                    "value": "1.04.21"
-                                },
-                                {
-                                    "label": "January",
-                                    "value": "1.01.21"
+                                    "value": "2.04.21"
                                 }
                             ],
                             "required": true

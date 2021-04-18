@@ -93,8 +93,7 @@
       "operatingSystem": {
         "type": "string",
         "allowedValues": [
-          "WindowsTesting",
-          "WindowsServer2016"
+          "WindowsTesting"
         ],
         "metadata": {
           "description": "Choose your operating system."
@@ -105,9 +104,7 @@
         "defaultValue": "latest",
         "allowedValues": [
           "latest",
-          "1.04.21",
-          "1.01.21",
-          "1.12.20"
+          "2.04.21"
         ],
         "metadata": {
           "description": "The should be the version you wish to use. To use the latest version use the default value or specify the version you want to use e.g. 1.0.0 or 1.20.4"
@@ -180,9 +177,6 @@
       "operatingSystemValues": {
         "WindowsTesting": {
             "galleryImageDefinitionName": "BA-Testng"
-        },
-        "WindowsServer2016": {
-            "galleryImageDefinitionName": "BA-WinServer2016"
         }
     },
     "windowsConfiguration": {
@@ -403,7 +397,7 @@
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
                   "script": "xBaLabWindowsCfg.ps1",
-                  "function": "[if(equals(parameters('operatingSystem'), 'WindowsServer2016'), 'xBaLabWinServerCfg', 'xBaLabWinClientCfg')]"
+                  "function": "[if(equals(parameters('operatingSystem'), 'WindowsTesting'), 'xBaLabWinClientCfg', 'xBaLabWinServerCfg')]"
                 }
               },
               "protectedSettings": {
