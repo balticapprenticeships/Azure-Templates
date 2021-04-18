@@ -113,7 +113,8 @@
         "type": "string",
         "defaultValue": "AutomaticByOS",
         "allowedValues": [
-          "AutomaticByOS"
+          "AutomaticByOS",
+          "AutomaticByPlatform"
         ]
       },
       "enableHotpatching": {
@@ -164,7 +165,7 @@
       "galleryImageName": "SharedImageGallery",
       "operatingSystemValues": {
         "WindowsTesting": {
-            "galleryImageDefinitionName": "BA-Win10-Testing"
+            "galleryImageDefinitionName": "BA-Win10-Gen1-Testing"
         }
     },
     "windowsConfiguration": {
@@ -439,7 +440,7 @@
         "type": "string",
         "value": "[parameters('location')]"
       },
-      "virtualMachineName": {
+      "vmNamePrefix": {
         "type": "string",
         "value": "[parameters('vmName')]"
       },
@@ -463,7 +464,7 @@
         "type": "string",
         "value": "[parameters('schedule')]"
       },
-      "virtualMachineSize": {
+      "vmSize": {
         "type": "string",
         "value": "[parameters('vmSize')]"
       },
