@@ -525,6 +525,10 @@
         "type": "string",
         "value": "[parameters('adminUsername')]"
       },
+      "adminPassword": {
+        "type": "string",
+        "value": "[parameters('adminPassword')]"
+      },
       "localUsername": {
         "type": "string",
         "value": "[parameters('localUsername')]"
