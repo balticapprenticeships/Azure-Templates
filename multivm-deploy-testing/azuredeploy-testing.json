@@ -83,8 +83,7 @@
       "osPlatform": {
           "type": "string",
           "allowedValues": [
-              "Windows",
-              "Linux"
+              "Windows"
           ],
           "metadata": {
             "description": "Select the custom OS type to deploy"
@@ -131,17 +130,6 @@
           "description": "Admin username for the Virtual Machine."
         }
       },
-      "authenticationType": {
-        "type": "string",
-        "defaultValue": "Password",
-        "allowedValues": [
-            "Password",
-            "sshPublicKey"
-        ],
-        "metadata": {
-          "descriptopn": "The type of authentication used on the virtual machine. SSH is recommended for Linux VMs"
-        }
-    },
       "adminPassword": {
         "type": "securestring",
         "metadata": {
@@ -176,7 +164,7 @@
       "galleryImageName": "SharedImageGallery",
       "operatingSystemValues": {
         "WindowsTesting": {
-            "galleryImageDefinitionName": "BA-Testng"
+            "galleryImageDefinitionName": "BA-Win10-Testing"
         }
     },
     "windowsConfiguration": {
@@ -361,7 +349,7 @@
           "osProfile": {
             "computerName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
             "adminUsername": "[parameters('adminUsername')]",
-            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('adminPassword'), json('null'))]",
+            "adminPassword": "[parameters('adminPassword')]",
             "windowsConfiguration": "[if(equals(parameters('osPlatform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
           },
           "licenseType": "[if(equals(parameters('operatingSystem'), 'WindowsTesting'), variables('windowsLicense'), json('null'))]",
@@ -447,13 +435,65 @@
       }
     ],
     "outputs": {
+      "location": {
+        "type": "string",
+        "value": "[parameters('location')]"
+      },
+      "virtualMachineName": {
+        "type": "string",
+        "value": "[parameters('vmName')]"
+      },
+      "createdBy": {
+        "type": "string",
+        "value": "[parameters('createdBy')]"
+      },
+      "trainer": {
+        "type": "string",
+        "value": "[parameters('trainerInitials')]"
+      },
+      "scheduleOn": {
+        "type": "string",
+        "value": "[parameters('schedule')]"
+      },
+      "resourceGroupCleanup": {
+        "type": "string",
+        "value": "[parameters('resourceGroupCleanup')]"
+      },
+      "osDiskType": {
+        "type": "string",
+        "value": "[parameters('schedule')]"
+      },
+      "virtualMachineSize": {
+        "type": "string",
+        "value": "[parameters('vmSize')]"
+      },
+      "osPlatform": {
+        "type": "string",
+        "value": "[parameters('osPlatform')]"
+      },
+      "operatingSystem": {
+        "type": "string",
+        "value": "[parameters('operatingSystem')]"
+      },
+      "imageVersion": {
+        "type": "string",
+        "value": "[parameters('imageVersion')]"
+      },
       "VirtualMachineDomain":{
         "type": "string",
-        "value": "[toLower(concat('baltic-', variables('vmNamePrefix'), copyindex(1)))]"
+        "value": ""
       },
       "adminUsername": {
         "type": "string",
         "value": "[parameters('adminUsername')]"
+      },
+      "localUsername": {
+        "type": "string",
+        "value": "[parameters('localUsername')]"
+      },
+      "localUserpassword": {
+        "type": "string",
+        "value": "[parameters('localUserPassword')]"
       }
     }
   }
