@@ -74,6 +74,7 @@
         "defaultValue": "Standard_D2s_v3",
         "allowedValues": [
           "Standard_B1ms",
+          "standard_B2s",
           "Standard_D2s_v3"
         ],
         "metadata": {

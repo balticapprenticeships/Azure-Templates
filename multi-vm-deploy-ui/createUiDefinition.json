@@ -74,6 +74,11 @@
                                             "value": "Standard_B1ms"
                                         },
                                         {
+                                            "label": "Standard_B2s",
+                                            "description": "2 vcpus, 4GB memory",
+                                            "value": "Standard_B2s"
+                                        },
+                                        {
                                             "label": "Standard_D2s_v3",
                                             "description": "2 vcpus, 8GB memory",
                                             "value": "Standard_D2s_v3"
