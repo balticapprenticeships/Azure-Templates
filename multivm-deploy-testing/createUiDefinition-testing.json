@@ -142,12 +142,12 @@
                         "name": "operatingSystem",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Operating System",
-                        "defaultValue": "Windows Testing",
+                        "defaultValue": "Exam Image",
                         "constraints": {
                             "allowedValues": [
                                 {
-                                    "label": "Windows Testing",
-                                    "value": "WindowsTesting"
+                                    "label": "Exam Image",
+                                    "value": "TestingImage"
                                 }
                             ],
                             "required": true

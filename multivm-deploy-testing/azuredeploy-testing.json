@@ -93,7 +93,7 @@
       "operatingSystem": {
         "type": "string",
         "allowedValues": [
-          "WindowsTesting"
+          "TestingImage"
         ],
         "metadata": {
           "description": "Choose your operating system."
@@ -165,8 +165,8 @@
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
       "galleryImageName": "SharedImageGallery",
       "operatingSystemValues": {
-        "WindowsTesting": {
-            "galleryImageDefinitionName": "BA-Win10-Gen1-Testing"
+        "TestingImage": {
+            "galleryImageDefinitionName": "BA-Testing"
         }
     },
     "windowsConfiguration": {
@@ -387,7 +387,7 @@
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
                   "script": "xBaLabWindowsCfg.ps1",
-                  "function": "[if(equals(parameters('operatingSystem'), 'WindowsTesting'), 'xBaLabWinClientCfg', 'xBaLabWinServerCfg')]"
+                  "function": "[if(equals(parameters('operatingSystem'), 'TestingImage'), 'xBaLabWinClientCfg', 'xBaLabWinServerCfg')]"
                 }
               },
               "protectedSettings": {
