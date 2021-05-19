@@ -104,7 +104,7 @@
         "defaultValue": "latest",
         "allowedValues": [
           "latest",
-          "2.04.21"
+          "1.05.21"
         ],
         "metadata": {
           "description": "The should be the version you wish to use. To use the latest version use the default value or specify the version you want to use e.g. 1.0.0 or 1.20.4"
@@ -354,7 +354,7 @@
             "adminPassword": "[parameters('adminPassword')]",
             "windowsConfiguration": "[if(equals(parameters('osPlatform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
           },
-          "licenseType": "[if(equals(parameters('operatingSystem'), 'WindowsTesting'), variables('windowsLicense'), json('null'))]",
+          "licenseType": "[if(equals(parameters('operatingSystem'), 'TestingImage'), variables('windowsLicense'), json('null'))]",
           "diagnosticsProfile": {
             "bootDiagnostics": {
               "enabled": false
