@@ -104,7 +104,7 @@
         "defaultValue": "latest",
         "allowedValues": [
           "latest",
-          "1.05.21"
+          "1.51.21"
         ],
         "metadata": {
           "description": "The should be the version you wish to use. To use the latest version use the default value or specify the version you want to use e.g. 1.0.0 or 1.20.4"
